@@ -8,4 +8,3 @@ Le but est de programmer les 3 algorithmes Tabou, Recuit Siulé et Génétique e
 
 Pour essayer avec d'autres villes, il suffit de mettre  jour le tableau des villes dans `cities.sh` et d'exécuter le programme avec la commande `bash cities.sh`.
 
- 

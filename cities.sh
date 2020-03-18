@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-tab=("paris" "lyon" "marseille" "lille" "bordeaux" "brest" "strasbourg")
+tab=("paris" "strasbourg" "lyon" "marseille" "bordeaux" "brest" "lille")
 
 rm cities.csv
 for city in ${tab[*]}; do
