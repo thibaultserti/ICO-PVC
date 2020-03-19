@@ -5,30 +5,37 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Main {
-    ArrayList<City> cities = new ArrayList<City>();
-    public Main() {
-        try {
-            String path = "../cities.csv";
-            BufferedReader file_source = new BufferedReader(new FileReader(path));
-            String s;
-            int i = 1;
+    
+    private static ArrayList<City> cities = new ArrayList<City>();
 
-            while ((s = file_source.readLine()) != null) {
-                if (i > 1) {
-                    String[] tab = s.split(",");
-                    this.cities.add(new City(tab[0], Double.parseDouble(tab[1]),Double.parseDouble(tab[2])));
-                }
-                i++;
+    public static void loadFile(String path) {
+        try {
+            BufferedReader file_source = new BufferedReader(new FileReader(path));
+            String s = file_source.readLine();
+            do {
+                System.out.println(s);
+                String[] tab = s.split(",");
+                cities.add(new City(tab[0], Double.parseDouble(tab[1]), Double.parseDouble(tab[2])));
             }
+            while ((s = file_source.readLine()) != null);
             file_source.close();
+            System.out.println("File opened succesfully");
         } catch (FileNotFoundException e) {
-            System.out.println("Error File not found !");
+            System.out.println("Error File Not Found !");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
+        if (args.length == 0)
+            loadFile("../cities.csv");
+        else
+            loadFile(args[0]);
+
+        Route route = new Route(cities);
+        System.out.println(cities);
     }
+
 }

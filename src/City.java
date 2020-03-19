@@ -33,7 +33,6 @@ public class City {
     public String toString() {
         return this.name;
     }
-
     //Distance en Km entre 2 Villes
     public double measureDistance(City city) {
         double deltaLatitude = city.getLatitude() - this.getLatitude();
