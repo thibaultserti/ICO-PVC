@@ -16,6 +16,8 @@ __Pour compiler et exécuter:__
 
 _Linux:_
 Depuis un terminal, placez-vous dans le dossier principal du projet (où le fichier `Makefile` est présent) et lancez `make build` pour compiler, puis `make run` pour exécuter.
+
+
 _Windows:_
 Depuis un terminal, placez-vous dans le dossier principal du projet et lancez : `javac -d bin src/*.java`
 Ensuite, placez-vous dans le dossier `bin` avec `cd bin` (obligatoire) et lancez `java Main`. 
