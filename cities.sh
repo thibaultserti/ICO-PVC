@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
-tab=("paris" "strasbourg" "lyon" "marseille" "bordeaux" "brest" "lille")
+# Le tableau doit être dans l'ordre optimal pour les distances
+tab=("paris" "lille" "strasbourg" "lyon" "marseille" "bordeaux" "brest")
 
 rm cities.csv
+echo "ville,x,y" >> cities.csv
+
 for city in ${tab[*]}; do
   curl "https://api-adresse.data.gouv.fr/search/?q=$city" >city.json
   x=$(jq '.features[0] .geometry .coordinates[0]' city.json)
