@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Main {
-    static ArrayList<City> cities = new ArrayList<City>();
+    private static ArrayList<City> cities = new ArrayList<City>();
 
     public static void loadFile(String path) {
         try {
@@ -18,6 +18,7 @@ public class Main {
             }
             while ((s = file_source.readLine()) != null);
             file_source.close();
+            System.out.println("File opened succesfully");
         } catch (FileNotFoundException e) {
             System.out.println("Error File Not Found !");
         } catch (IOException e) {
@@ -25,8 +26,10 @@ public class Main {
         }
     }
 
-
+      
+  
     public static void main(String[] args) {
+
         System.out.println("Test de l'algorithme Recuit-Simulé :");
         loadFile("cities.csv");
         Route route = new Route(cities);
@@ -37,6 +40,8 @@ public class Main {
         double distanceOpt = (new Route(cities)).getTotalDistance();
         System.out.println("La distance optimale est : " + distanceOpt);
 
-
+        Route route = new Route(cities);
+        System.out.println(cities);
     }
+
 }
