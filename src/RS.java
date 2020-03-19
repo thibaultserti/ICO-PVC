@@ -10,8 +10,8 @@ public class RS {
 
     public RS() {
         startingTemperature = 10;
-        numberOfIterations = 10000;
-        coolingRate = 0.9;
+        numberOfIterations = 1000;
+        coolingRate = 0.99;
     }
 
     public RS(Route route) {
@@ -66,7 +66,7 @@ public class RS {
                 t *= coolingRate;
             }
 
-            if (i % 1 == 0) {
+            if (i % 100 == 0) {
                 System.out.println(Colors.ANSI_BLUE + "Iteration #" + i + Colors.ANSI_RESET);
                 System.out.println(Colors.ANSI_CYAN + "Température : " + Colors.ANSI_RESET + t);
                 System.out.println(Colors.ANSI_CYAN + "Solution : " + Colors.ANSI_RESET + currentSolution);
