@@ -29,10 +29,8 @@ public class Main {
 
 
     public static void main(String[] args) {
-        if (args.length == 0)
-            loadFile("../cities.csv");
-        else
-            loadFile(args[0]);
+        
+        loadFile("../cities.csv");
 
         Route route = new Route(cities);
         System.out.println(cities);
