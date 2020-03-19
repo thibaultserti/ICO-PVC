@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Main {
-    
     private static ArrayList<City> cities = new ArrayList<City>();
 
     public static void loadFile(String path) {
@@ -27,10 +26,19 @@ public class Main {
         }
     }
 
-
+      
+  
     public static void main(String[] args) {
-        
-        loadFile("../cities.csv");
+
+        System.out.println("Test de l'algorithme Recuit-Simulé :");
+        loadFile("cities.csv");
+        Route route = new Route(cities);
+        System.out.println(cities);
+        RS rs = new RS(route);
+        double bestDistance = rs.simulate();
+        System.out.println("La meilleure distance trouvée est : " + bestDistance);
+        double distanceOpt = (new Route(cities)).getTotalDistance();
+        System.out.println("La distance optimale est : " + distanceOpt);
 
         Route route = new Route(cities);
         System.out.println(cities);
