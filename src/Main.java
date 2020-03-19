@@ -26,12 +26,8 @@ public class Main {
         }
     }
 
-      
-  
-    public static void main(String[] args) {
-
+    public static void testRS(){
         System.out.println("Test de l'algorithme Recuit-Simulé :");
-        loadFile("cities.csv");
         Route route = new Route(cities);
         System.out.println(cities);
         RS rs = new RS(route);
@@ -39,9 +35,12 @@ public class Main {
         System.out.println("La meilleure distance trouvée est : " + bestDistance);
         double distanceOpt = (new Route(cities)).getTotalDistance();
         System.out.println("La distance optimale est : " + distanceOpt);
+    }
+  
+    public static void main(String[] args) {
+        loadFile("cities.csv");
+        testRS();
 
-        Route route = new Route(cities);
-        System.out.println(cities);
     }
 
 }
