@@ -38,6 +38,8 @@ public class Taboo {
 
     public double run() {
 
+        // some variables are cached, others aren't really... not that clean, sorry
+
         Route currentSolution = route;
         Route bestSolution = new Route(currentSolution.getCities());
 
@@ -84,6 +86,7 @@ public class Taboo {
             setAbsorption(consideredDistance, Double.POSITIVE_INFINITY);
             setAbsorption(currentDistance, consideredDistance);
             
+            // not pretty
             tabooList = new ArrayList<Route>(adjacentSolutions);
             tabooList.remove(consideredSolution);
 
@@ -109,6 +112,8 @@ public class Taboo {
 
     }
     
+
+    // there could be an other interesting way to represent this... I lay so I chose the straightforward way.
     private HashMap<Double,Double> absorption;
 
     private double getAbsorption(double solutionScore) {
