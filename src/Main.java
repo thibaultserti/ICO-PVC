@@ -28,7 +28,7 @@ public class Main {
         }
     }
 
-    public static void testRS(){
+    public static void testRS() {
         System.out.println("Test de l'algorithme Recuit-Simulé :");
         Route route = new Route(cities);
         System.out.println(cities);
@@ -38,10 +38,21 @@ public class Main {
         double distanceOpt = (new Route(cities)).getTotalDistance();
         System.out.println("La distance optimale est : " + distanceOpt);
     }
-  
+
+    public static void testAG() {
+        System.out.println("Test de l'algorithme Génétique :");
+        Route route = new Route(cities);
+        System.out.println(cities);
+        AG ag = new AG(route);
+        double bestDistance = ag.simulate();
+        System.out.println("La meilleure distance trouvée est : " + bestDistance);
+        double distanceOpt = (new Route(cities)).getTotalDistance();
+        System.out.println("La distance optimale est : " + distanceOpt);
+    }
+
     public static void main(String[] args) {
         loadFile("cities.csv");
-        testRS();
+        testAG();
 
     }
 
