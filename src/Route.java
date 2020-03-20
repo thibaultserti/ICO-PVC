@@ -44,6 +44,10 @@ public class Route {
     public void swapCities() {
         int a = generateRandomIndex();
         int b = generateRandomIndex();
+        swapCities(a,b);
+    }
+
+    public void swapCities(int a, int b) {
         previousCities = cities;
         City x = cities.get(a);
         City y = cities.get(b);

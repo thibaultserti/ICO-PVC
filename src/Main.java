@@ -37,6 +37,16 @@ public class Main {
         System.out.println("La meilleure distance trouvée est : " + bestDistance);
         double distanceOpt = (new Route(cities)).getTotalDistance();
         System.out.println("La distance optimale est : " + distanceOpt);
+      
+    public static void testTaboo(){
+        System.out.println("Test de l'algorithme Tabou :");
+        Route route = new Route(cities);
+        System.out.println(cities);
+        Taboo taboo = new Taboo(route);
+        double bestDistance = taboo.run();
+        System.out.println("La meilleure distance trouvée est : " + bestDistance);
+        double distanceOpt = (new Route(cities)).getTotalDistance();
+        System.out.println("La distance optimale est : " + distanceOpt);
     }
 
     public static void testAG() {
@@ -52,8 +62,6 @@ public class Main {
 
     public static void main(String[] args) {
         loadFile("cities.csv");
-        testAG();
-
     }
 
 }
