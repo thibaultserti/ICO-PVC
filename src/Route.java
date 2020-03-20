@@ -47,14 +47,6 @@ public class Route {
         swapCities(a,b);
     }
 
-    public void swapCities(int a, int b) {
-        previousCities = cities;
-        City x = cities.get(a);
-        City y = cities.get(b);
-        cities.set(a, y);
-        cities.set(b, x);
-    }
-
     public void revertSwap() {
         cities = previousCities;
     }

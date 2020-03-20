@@ -117,7 +117,7 @@ public class AG {
 
     }
 
-    public double simulate() {
+    public double run() {
         // on va garder la meilleure route entre chaque itération pour être sûr de ne pas la perdre
         Route bestRoute = getBestRoute(routes);
         double bestDistance = bestRoute.getTotalDistance();

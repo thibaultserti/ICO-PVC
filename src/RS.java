@@ -43,7 +43,7 @@ public class RS {
         this.coolingRate = coolingRate;
     }
 
-    public double simulate() {
+    public double run() {
         double t = startingTemperature;
 
         Route currentSolution = route;

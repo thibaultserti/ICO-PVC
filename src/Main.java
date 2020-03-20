@@ -33,11 +33,11 @@ public class Main {
         Route route = new Route(cities);
         System.out.println(cities);
         RS rs = new RS(route);
-        double bestDistance = rs.simulate();
+        double bestDistance = rs.run();
         System.out.println("La meilleure distance trouvée est : " + bestDistance);
         double distanceOpt = (new Route(cities)).getTotalDistance();
         System.out.println("La distance optimale est : " + distanceOpt);
-      
+    }
     public static void testTaboo(){
         System.out.println("Test de l'algorithme Tabou :");
         Route route = new Route(cities);
@@ -54,7 +54,7 @@ public class Main {
         Route route = new Route(cities);
         System.out.println(cities);
         AG ag = new AG(route);
-        double bestDistance = ag.simulate();
+        double bestDistance = ag.run();
         System.out.println("La meilleure distance trouvée est : " + bestDistance);
         double distanceOpt = (new Route(cities)).getTotalDistance();
         System.out.println("La distance optimale est : " + distanceOpt);
@@ -62,6 +62,9 @@ public class Main {
 
     public static void main(String[] args) {
         loadFile("cities.csv");
+        //testAG();
+        //testRS();
+        //testTaboo();
     }
 
 }
