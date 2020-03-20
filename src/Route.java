@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 
 public class Route {
 
@@ -37,6 +36,10 @@ public class Route {
     public void swapCities() {
         int a = generateRandomIndex();
         int b = generateRandomIndex();
+        swapCities(a,b);
+    }
+
+    public void swapCities(int a, int b) {
         previousCities = cities;
         City x = cities.get(a);
         City y = cities.get(b);

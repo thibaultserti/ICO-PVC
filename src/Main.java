@@ -28,21 +28,20 @@ public class Main {
         }
     }
 
-    public static void testRS(){
-        System.out.println("Test de l'algorithme Recuit-Simulé :");
+    public static void testTaboo(){
+        System.out.println("Test de l'algorithme Tabou :");
         Route route = new Route(cities);
         System.out.println(cities);
-        RS rs = new RS(route);
-        double bestDistance = rs.simulate();
+        Taboo taboo = new Taboo(route);
+        double bestDistance = taboo.run();
         System.out.println("La meilleure distance trouvée est : " + bestDistance);
         double distanceOpt = (new Route(cities)).getTotalDistance();
         System.out.println("La distance optimale est : " + distanceOpt);
     }
   
     public static void main(String[] args) {
-        loadFile("cities.csv");
-        testRS();
-
+        loadFile("../cities.csv");
+        testTaboo();
     }
 
 }
