@@ -1,3 +1,5 @@
+package algos;
+
 public class City {
 
     //constantes
