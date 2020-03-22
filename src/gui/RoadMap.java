@@ -21,7 +21,7 @@ public class RoadMap extends JPanel {
     public void paintComponent(Graphics g) {
         try {
             Image img = ImageIO.read(new File("img/france.png"));
-            g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+            g.drawImage(img, 0, 0, this.getWidth()-200, this.getHeight(), this);
             drawCity(new City("Brest", -4.498893, 48.406102), g);
         } catch (IOException e) {
             e.printStackTrace();
@@ -36,7 +36,11 @@ public class RoadMap extends JPanel {
         double y = ((y1 - y_) / (y0 - y1)) * this.getHeight() + this.getHeight();
         g.fillOval((int) x, (int) y, 10, 10);
         g.drawString(city.getName(), (int) x, (int) y);
-
-
     }
+
+    public void drawRoute(City city1, City city2, Graphics g) {
+        g.drawLine((int) city1.getLongitude(), (int) city1.getLatitude(), (int) city2.getLongitude(), (int) city2.getLatitude());
+    }
+
+
 }
