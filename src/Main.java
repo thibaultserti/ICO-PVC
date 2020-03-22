@@ -1,10 +1,13 @@
 import algos.*;
+import gui.GUI;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
     private static ArrayList<City> cities = new ArrayList<City>();
@@ -40,7 +43,8 @@ public class Main {
         double distanceOpt = (new Route(cities)).getTotalDistance();
         System.out.println("La distance optimale est : " + distanceOpt);
     }
-    public static void testTaboo(){
+
+    public static void testTaboo() {
         System.out.println("Test de l'algorithme Tabou :");
         Route route = new Route(cities);
         System.out.println(cities);
@@ -63,10 +67,17 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        loadFile("cities.csv");
-        //testAG();
-        //testRS();
-        //testTaboo();
+        Scanner myObj = new Scanner(System.in);
+        System.out.println("Voulez-vous lancer le programme en mode graphique (o/n) ?");
+        String accept = myObj.nextLine();
+        if (accept.equals("o") || accept.equals("y")) {
+            JFrame GUI = new GUI();
+        } else {
+            loadFile("cities.csv");
+            //testAG();
+            //testRS();
+            //testTaboo();
+        }
     }
 
 }
