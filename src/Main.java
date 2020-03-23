@@ -3,6 +3,7 @@ import gui.GUI;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import static gui.Settings.loadFile;
@@ -44,10 +45,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Scanner myObj = new Scanner(System.in);
-        System.out.println("Voulez-vous lancer le programme en mode graphique (o/n) ?");
-        String accept = myObj.nextLine();
-        if (accept.equals("o") || accept.equals("y")) {
+        if ((args.length != 0) && Arrays.asList(args).contains("--gui")) {
             JFrame GUI = new GUI();
         } else {
             cities = loadFile("cities.csv");
