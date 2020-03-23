@@ -18,10 +18,10 @@ public class GUI extends JFrame {
         this.setIconImage(icon);
 
         RoadMap roadMap = new RoadMap();
-        Controls controls = new Controls();
+        Controls controls = new Controls(roadMap);
 
         JPanel content = new JPanel();
-        content.setPreferredSize(new Dimension(1400,1000));
+        content.setPreferredSize(new Dimension(1400, 1000));
         content.setLayout(new GridBagLayout());
 
         GridBagConstraints gbc = new GridBagConstraints();

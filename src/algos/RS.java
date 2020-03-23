@@ -10,6 +10,9 @@ public class RS {
     private double numberOfIterations;
     private double coolingRate;
 
+    private Route bestSolution = null;
+    private double bestDistance = Double.POSITIVE_INFINITY;
+
     public RS() {
         startingTemperature = 10;
         numberOfIterations = 1000;
@@ -49,10 +52,10 @@ public class RS {
         double t = startingTemperature;
 
         Route currentSolution = route;
-        Route bestSolution = new Route(currentSolution.getCities());
+        bestSolution = new Route(currentSolution.getCities());
 
         double currentDistance = currentSolution.getTotalDistance();
-        double bestDistance = route.getTotalDistance();
+        bestDistance = route.getTotalDistance();
 
         for (int i = 0; i < numberOfIterations; i++) {
 
@@ -82,4 +85,11 @@ public class RS {
         return bestDistance;
     }
 
+    public Route getBestSolution() {
+        return bestSolution;
+    }
+
+    public double getBestDistance() {
+        return bestDistance;
+    }
 }

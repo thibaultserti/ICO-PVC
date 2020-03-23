@@ -5,9 +5,12 @@ import java.util.Collections;
 import java.util.HashMap;
 
 public class Taboo {
-   
+
     private Route route;
     private int maxIterations;
+
+    private Route bestSolution = null;
+    private double bestDistance = Double.POSITIVE_INFINITY;
 
     public Taboo() {
         maxIterations = 500;
@@ -43,16 +46,16 @@ public class Taboo {
         // some variables are cached, others aren't really... not that clean, sorry
 
         Route currentSolution = route;
-        Route bestSolution = new Route(currentSolution.getCities());
+        bestSolution = new Route(currentSolution.getCities());
 
         double currentDistance = currentSolution.getTotalDistance();
-        double bestDistance = route.getTotalDistance();
+        bestDistance = route.getTotalDistance();
 
         double optimalDistanceBound = 0;
 
         ArrayList<Route> tabooList = new ArrayList<Route>();
         ArrayList<Route> adjacentSolutions;
-        
+
         initAspiration();
         setAbsorption(currentDistance, Double.POSITIVE_INFINITY);
 
@@ -63,13 +66,13 @@ public class Taboo {
         double consideredDistance = 0;
 
         Route tempRoute = null;
-        int tempLength = 0;        
-        
+        int tempLength = 0;
+
         int n = route.getCities().size();
 
         while (currentDistance > optimalDistanceBound
                 && i - bestIteration < maxIterations) {
-            
+
             i++;
 
             adjacentSolutions = generateAdjacentSolutions(currentSolution, n);
@@ -77,8 +80,8 @@ public class Taboo {
 
             for (int j = 0; j < tempLength; j++) {
                 tempRoute = adjacentSolutions.get(j);
-                if(tempRoute.getTotalDistance() <= getAbsorption(currentDistance)
-                    || !tabooList.contains(tempRoute)) {
+                if (tempRoute.getTotalDistance() <= getAbsorption(currentDistance)
+                        || !tabooList.contains(tempRoute)) {
                     consideredSolution = new Route(tempRoute);
                 }
             }
@@ -87,7 +90,7 @@ public class Taboo {
 
             setAbsorption(consideredDistance, Double.POSITIVE_INFINITY);
             setAbsorption(currentDistance, consideredDistance);
-            
+
             // not pretty
             tabooList = new ArrayList<Route>(adjacentSolutions);
             tabooList.remove(consideredSolution);
@@ -95,7 +98,7 @@ public class Taboo {
             currentSolution = consideredSolution;
             currentDistance = consideredDistance;
 
-            if (currentDistance < bestDistance) {            
+            if (currentDistance < bestDistance) {
                 bestDistance = currentDistance;
                 bestIteration = i;
             }
@@ -113,10 +116,10 @@ public class Taboo {
         return bestDistance;
 
     }
-    
+
 
     // there could be an other interesting way to represent this... I lay so I chose the straightforward way.
-    private HashMap<Double,Double> absorption;
+    private HashMap<Double, Double> absorption;
 
     private double getAbsorption(double solutionScore) {
         return absorption.get(solutionScore);
@@ -140,4 +143,11 @@ public class Taboo {
         return res;
     }
 
+    public Route getBestSolution() {
+        return bestSolution;
+    }
+
+    public double getBestDistance() {
+        return bestDistance;
+    }
 }
