@@ -58,7 +58,6 @@ public class RS {
         bestDistance = route.getTotalDistance();
 
         for (int i = 0; i < numberOfIterations; i++) {
-
             if (t > 0.1) {
                 currentSolution.swapCities();
                 currentDistance = currentSolution.getTotalDistance();
@@ -81,7 +80,6 @@ public class RS {
 
             }
         }
-
         return bestDistance;
     }
 

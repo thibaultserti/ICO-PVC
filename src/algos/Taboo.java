@@ -100,6 +100,7 @@ public class Taboo {
 
             if (currentDistance < bestDistance) {
                 bestDistance = currentDistance;
+                bestSolution = new Route(currentSolution.getCities());
                 bestIteration = i;
             }
 

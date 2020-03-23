@@ -83,7 +83,7 @@ public class Controls extends JPanel {
                 Route bestSolution = taboo.getBestSolution();
                 labelBestDistance.setText("<html> Meilleure distance trouvée : " + bestDistance + "</html>");
                 labelBestSolution.setText("<html>Meilleure solution trouvée : " + bestSolution + "</html>");
-                setRoute(route);
+                setRoute(bestSolution);
             }
             public void runAG() {
                 Route route = new Route(cities);
@@ -92,7 +92,7 @@ public class Controls extends JPanel {
                 Route bestSolution = ag.getBestSolution();
                 labelBestDistance.setText("<html> Meilleure distance trouvée : " + bestDistance + "</html>");
                 labelBestSolution.setText("<html>Meilleure solution trouvée : " + bestSolution + "</html>");
-                setRoute(route);
+                setRoute(bestSolution);
             }
             public void runRS() {
                 Route route = new Route(cities);
@@ -101,7 +101,7 @@ public class Controls extends JPanel {
                 Route bestSolution = rs.getBestSolution();
                 labelBestDistance.setText("<html> Meilleure distance trouvée : " + bestDistance + "</html>");
                 labelBestSolution.setText("<html>Meilleure solution trouvée : " + bestSolution + "</html>");
-                setRoute(route);
+                setRoute(bestSolution);
             }
         });
 
