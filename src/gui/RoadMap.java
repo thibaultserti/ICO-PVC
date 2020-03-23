@@ -12,16 +12,20 @@ import java.io.IOException;
 public class RoadMap extends JPanel {
 
     private static final double CONVERT_RADIANS_TO_DEGREES = 180D / Math.PI;
-    private double x0 = -5.352568;
-    private double x1 = 8.450785;
-    private double y0 = 51.845539;
-    private double y1 = 41.496396;
+    private static final double x0 = -5.352568;
+    private static final double x1 = 8.450785;
+    private static final double y0 = 51.845539;
+    private static final double y1 = 41.496396;
 
+    public RoadMap() {
+        super();
+        this.setPreferredSize(new Dimension(1000,1000));
+    }
 
     public void paintComponent(Graphics g) {
         try {
             Image img = ImageIO.read(new File("img/france.png"));
-            g.drawImage(img, 0, 0, this.getWidth()-200, this.getHeight(), this);
+            g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
             drawCity(new City("Brest", -4.498893, 48.406102), g);
         } catch (IOException e) {
             e.printStackTrace();

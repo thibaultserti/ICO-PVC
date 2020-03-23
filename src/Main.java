@@ -69,15 +69,15 @@ public class Main {
     public static void main(String[] args) {
         Scanner myObj = new Scanner(System.in);
         System.out.println("Voulez-vous lancer le programme en mode graphique (o/n) ?");
-        String accept = myObj.nextLine();
-        if (accept.equals("o") || accept.equals("y")) {
+        //String accept = myObj.nextLine();
+        //if (accept.equals("o") || accept.equals("y")) {
             JFrame GUI = new GUI();
-        } else {
+       // } else {
             loadFile("cities.csv");
             //testAG();
             //testRS();
             //testTaboo();
-        }
+        //}
     }
 
 }
