@@ -16,6 +16,7 @@ Une fois exécuté, les villes sont enregistrées dans le fichier `cities.csv`.
 Il est lui même utilisé pour créer les objets Java par la classe Main.
 
 Pour essayer avec d'autres villes, il suffit de mettre à jour le tableau des villes dans `cities.sh` et d'exécuter le programme avec la commande `bash cities.sh`.
+L'option `--size` ou `-s` permet de spécifier le nombre de villes à utiliser (7, 15 ou 30).
 
 __Pour compiler et exécuter:__
 
