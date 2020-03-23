@@ -4,6 +4,11 @@ Le but est de programmer les 3 algorithmes Tabou, Recuit Siulé et Génétique e
 
 __Utilisation:__
 
+__Interface graphique:__
+Il y a deux modes pour lancer le programme : en ligne de commande ou avec l'interface graphique.
+Pour lancer le programme en mode graphique, il faut utiliser l'option `--gui`
+Pour le lancer en mode ligne de commande, aucune option n'est nécessaire.
+
 __Villes:__
 
 La récupération des villes se fait avec `cities.sh`. 
