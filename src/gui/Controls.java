@@ -11,6 +11,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.StringJoiner;
 
 import static gui.Settings.loadFile;
 
@@ -70,43 +72,51 @@ public class Controls extends JPanel {
         // Listener bouton
         runButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
+                Route bestSolution;
+
                 if (algo1.isSelected()) {
-                    runTabou();
+                    bestSolution = runTabou();
                 } else if (algo2.isSelected()) {
-                    runRS();
+                    bestSolution = runRS();
                 } else {
-                    runAG();
+                    bestSolution = runAG();
                 }
+                double bestDistance = bestSolution.getTotalDistance();
+                // Pour rajouter des <br> entre chaque ville
+                String[] bestSolution_ = bestSolution.toString().split(",");
+                StringJoiner joiner = new StringJoiner(",");
+                for (int i = 0; i < bestSolution_.length; i++) {
+                    if (i % 5 == 4) {
+                        joiner.add(bestSolution_[i] + "<br>");
+                    } else {
+                        joiner.add(bestSolution_[i]);
+                    }
+                }
+                String bestSolution__ = joiner.toString();
+                labelBestDistance.setText("<html> Meilleure distance trouvée : " + bestDistance + "</html>");
+                labelBestSolution.setText("<html> Meilleure solution trouvée : -----------------------------<br>" + bestSolution__ + "</html>");
+                setRoute(bestSolution);
             }
 
-            public void runTabou() {
+            public Route runTabou() {
                 Route route = new Route(cities);
                 Taboo taboo = new Taboo(route);
                 double bestDistance = taboo.run();
-                Route bestSolution = taboo.getBestSolution();
-                labelBestDistance.setText("<html> Meilleure distance trouvée : " + bestDistance + "</html>");
-                labelBestSolution.setText("<html>Meilleure solution trouvée : " + bestSolution + "</html>");
-                setRoute(bestSolution);
+                return taboo.getBestSolution();
             }
 
-            public void runAG() {
+            public Route runAG() {
                 Route route = new Route(cities);
                 AG ag = new AG(route);
                 double bestDistance = ag.run();
-                Route bestSolution = ag.getBestSolution();
-                labelBestDistance.setText("<html> Meilleure distance trouvée : " + bestDistance + "</html>");
-                labelBestSolution.setText("<html>Meilleure solution trouvée : " + bestSolution + "</html>");
-                setRoute(bestSolution);
+                return ag.getBestSolution();
             }
 
-            public void runRS() {
+            public Route runRS() {
                 Route route = new Route(cities);
                 RS rs = new RS(route);
                 double bestDistance = rs.run();
-                Route bestSolution = rs.getBestSolution();
-                labelBestDistance.setText("<html> Meilleure distance trouvée : " + bestDistance + "</html>");
-                labelBestSolution.setText("<html>Meilleure solution trouvée : " + bestSolution + "</html>");
-                setRoute(bestSolution);
+                return rs.getBestSolution();
             }
         });
 
