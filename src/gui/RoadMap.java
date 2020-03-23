@@ -38,6 +38,7 @@ public class RoadMap extends JPanel {
                 }
             }
             if (!route.getCities().isEmpty()) {
+                System.out.println(route);
                 for (int i = 0; i < this.route.size() - 1; i++) {
                     drawRoute(route.getCities().get(i), route.getCities().get(i + 1), g);
                 }

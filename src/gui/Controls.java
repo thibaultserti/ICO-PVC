@@ -1,8 +1,6 @@
 package gui;
 
-import algos.City;
-import algos.Route;
-import algos.Taboo;
+import algos.*;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -11,9 +9,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import static gui.Settings.loadFile;
+
+
 public class Controls extends JPanel {
     private JRadioButton algo1, algo2, algo3;
     private RoadMap roadMap;
+    private ArrayList<City> cities;
 
     public Controls(RoadMap roadMap) {
         super();
@@ -23,15 +25,26 @@ public class Controls extends JPanel {
                 "Options de configuration", TitledBorder.CENTER, TitledBorder.TOP, new Font("Arial", Font.BOLD, 20)));
         this.setPreferredSize(new Dimension(400, 1000));
 
+        // Choix des données
+        JPanel panData = new JPanel();
+        panData.setBorder(BorderFactory.createTitledBorder("Choix des données"));
+        panData.setPreferredSize(new Dimension(350, 100));
+        panData.setLayout(new GridLayout(1, 2));
+        JButton loadButton = new JButton("<html>Charger les données depuis le CSV</html>");
+        JButton scriptButton = new JButton("<html>Exécuter le script de récupération de données</html>");
+        panData.add(loadButton);
+        panData.add(scriptButton);
+        this.add(panData, BorderLayout.NORTH);
+
         // Boutons radios
         JPanel panAlgos = new JPanel();
         panAlgos.setBorder(BorderFactory.createTitledBorder("Choix des algorithmes"));
         panAlgos.setPreferredSize(new Dimension(350, 150));
         panAlgos.setLayout(new GridLayout(3, 1));
-        algo1 = new JRadioButton("Tabou");
+        algo1 = new JRadioButton("Algorithme Tabou");
         algo1.setSelected(true);
-        algo2 = new JRadioButton("Recuit-Simulé");
-        algo3 = new JRadioButton("Algorithme génétique");
+        algo2 = new JRadioButton("Algorithme Recuit-Simulé");
+        algo3 = new JRadioButton("Algorithme Génétique");
 
         ButtonGroup bg = new ButtonGroup();
         bg.add(algo1);
@@ -57,29 +70,47 @@ public class Controls extends JPanel {
                 if (algo1.isSelected()) {
                     runTabou();
                 } else if (algo2.isSelected()) {
-                    //runAG();
+                    runRS();
                 } else {
-                    //runRS();
+                    runAG();
                 }
-
             }
 
             public void runTabou() {
-                ArrayList<City> cities = new ArrayList<City>();
-                cities.add(new City("Brest", -4.498893, 48.406102));
-                cities.add(new City("Paris", 2.3752, 48.845));
-                cities.add(new City("Bordeaux", -0.587876, 44.853383));
                 Route route = new Route(cities);
                 Taboo taboo = new Taboo(route);
                 double bestDistance = taboo.run();
                 Route bestSolution = taboo.getBestSolution();
-                labelBestDistance.setText("Meilleure distance trouvée : " + bestDistance);
-                labelBestSolution.setText("Meilleure solution trouvée : " + bestSolution);
+                labelBestDistance.setText("<html> Meilleure distance trouvée : " + bestDistance + "</html>");
+                labelBestSolution.setText("<html>Meilleure solution trouvée : " + bestSolution + "</html>");
                 setRoute(route);
             }
-
+            public void runAG() {
+                Route route = new Route(cities);
+                AG ag = new AG(route);
+                double bestDistance = ag.run();
+                Route bestSolution = ag.getBestSolution();
+                labelBestDistance.setText("<html> Meilleure distance trouvée : " + bestDistance + "</html>");
+                labelBestSolution.setText("<html>Meilleure solution trouvée : " + bestSolution + "</html>");
+                setRoute(route);
+            }
+            public void runRS() {
+                Route route = new Route(cities);
+                RS rs = new RS(route);
+                double bestDistance = rs.run();
+                Route bestSolution = rs.getBestSolution();
+                labelBestDistance.setText("<html> Meilleure distance trouvée : " + bestDistance + "</html>");
+                labelBestSolution.setText("<html>Meilleure solution trouvée : " + bestSolution + "</html>");
+                setRoute(route);
+            }
         });
 
+        loadButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                cities = loadFile("cities.csv");
+                setCities(cities);
+            }
+        });
     }
 
     public void setRoute(Route route) {
