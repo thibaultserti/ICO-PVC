@@ -7,6 +7,9 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import static gui.Settings.loadFile;
@@ -85,6 +88,7 @@ public class Controls extends JPanel {
                 labelBestSolution.setText("<html>Meilleure solution trouvée : " + bestSolution + "</html>");
                 setRoute(bestSolution);
             }
+
             public void runAG() {
                 Route route = new Route(cities);
                 AG ag = new AG(route);
@@ -94,6 +98,7 @@ public class Controls extends JPanel {
                 labelBestSolution.setText("<html>Meilleure solution trouvée : " + bestSolution + "</html>");
                 setRoute(bestSolution);
             }
+
             public void runRS() {
                 Route route = new Route(cities);
                 RS rs = new RS(route);
@@ -105,10 +110,21 @@ public class Controls extends JPanel {
             }
         });
 
-        loadButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                cities = loadFile("cities.csv");
-                setCities(cities);
+        loadButton.addActionListener(arg0 -> {
+            cities = loadFile("cities.csv");
+            setCities(cities);
+        });
+
+        scriptButton.addActionListener(arg0 -> {
+            try {
+                Process proc = Runtime.getRuntime().exec("bash cities.sh");
+                BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+                String s = null;
+                while ((s = stdInput.readLine()) != null) {
+                    System.out.println(s);
+                }
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
             }
         });
     }
