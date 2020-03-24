@@ -4,6 +4,8 @@ import algos.*;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,15 +23,40 @@ public class Controls extends JPanel {
     private JRadioButton algo1, algo2, algo3;
     private RoadMap roadMap;
     private ArrayList<City> cities;
+    private int nbCities = 7;
 
     public Controls(RoadMap roadMap) {
         super();
         this.roadMap = roadMap;
+
         // Titre
         this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black),
                 "Options de configuration", TitledBorder.CENTER, TitledBorder.TOP, new Font("Arial", Font.BOLD, 20)));
         this.setPreferredSize(new Dimension(400, 1000));
 
+        // Choix du nombre de villes
+        JPanel panNbCities = new JPanel();
+        panNbCities.setBorder(BorderFactory.createTitledBorder("Nombre de villes"));
+        panNbCities.setPreferredSize(new Dimension(350, 100));
+
+        JSlider slideNbCities = new JSlider();
+        JLabel labelNbCities = new JLabel("Nombre de villes : " + nbCities);
+        slideNbCities.setMaximum(30);
+        slideNbCities.setMinimum(5);
+        slideNbCities.setValue(nbCities);
+        slideNbCities.setPaintTicks(true);
+        slideNbCities.setPaintLabels(true);
+        slideNbCities.setMinorTickSpacing(1);
+        slideNbCities.setMajorTickSpacing(5);
+        slideNbCities.addChangeListener(new ChangeListener(){
+            public void stateChanged(ChangeEvent event){
+                labelNbCities.setText("Nombre de villes : " + ((JSlider)event.getSource()).getValue());
+                nbCities = ((JSlider)event.getSource()).getValue();
+            }
+        });
+        panNbCities.add(labelNbCities);
+        panNbCities.add(slideNbCities);
+        this.add(panNbCities,BorderLayout.NORTH);
         // Choix des données
         JPanel panData = new JPanel();
         panData.setBorder(BorderFactory.createTitledBorder("Choix des données"));
@@ -64,10 +91,15 @@ public class Controls extends JPanel {
         this.add(runButton);
 
         // Labels
+        // Choix des données
+        JPanel panResult = new JPanel();
+        panResult.setBorder(BorderFactory.createTitledBorder("Résultats"));
+        panResult.setPreferredSize(new Dimension(380, 300));
         JLabel labelBestDistance = new JLabel("Meilleure distance trouvée : -------");
         JLabel labelBestSolution = new JLabel("Meilleure solution trouvée : -------");
-        this.add(labelBestDistance);
-        this.add(labelBestSolution);
+        panResult.add(labelBestDistance);
+        panResult.add(labelBestSolution);
+        this.add(panResult, BorderLayout.NORTH);
 
         // Listener bouton
         runButton.addActionListener(new ActionListener() {
@@ -127,7 +159,7 @@ public class Controls extends JPanel {
 
         scriptButton.addActionListener(arg0 -> {
             try {
-                Process proc = Runtime.getRuntime().exec("bash cities.sh");
+                Process proc = Runtime.getRuntime().exec("bash cities.sh --size " + nbCities);
                 BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream()));
                 String s = null;
                 while ((s = stdInput.readLine()) != null) {
