@@ -1,3 +1,5 @@
+package algos;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -11,6 +13,9 @@ public class AG {
     private int arenaSize;
     private int populationSize;
     private int numberOfIterations;
+
+    private Route bestSolution = null;
+    private double bestDistance = Double.POSITIVE_INFINITY;
 
     public AG() {
         mutationRate = 0.015;
@@ -119,20 +124,27 @@ public class AG {
 
     public double run() {
         // on va garder la meilleure route entre chaque itération pour être sûr de ne pas la perdre
-        Route bestRoute = getBestRoute(routes);
-        double bestDistance = bestRoute.getTotalDistance();
+        bestSolution = getBestRoute(routes);
+        bestDistance = bestSolution.getTotalDistance();
         for (int i = 0; i < numberOfIterations; i++) {
             routes = evolve(routes);
-            bestRoute = getBestRoute(routes);
-            bestDistance = bestRoute.getTotalDistance();
+            bestSolution = getBestRoute(routes);
+            bestDistance = bestSolution.getTotalDistance();
             if (i % 10 == 0) {
                 System.out.println(Colors.ANSI_BLUE + "Iteration #" + i + Colors.ANSI_RESET);
                 System.out.println(Colors.ANSI_CYAN + "Routes : " + Colors.ANSI_RESET + routes);
                 System.out.println(Colors.ANSI_CYAN + "Meilleure distance : " + Colors.ANSI_RESET + bestDistance);
-                System.out.println(Colors.ANSI_CYAN + "Meilleure solution : " + Colors.ANSI_RESET + bestRoute);
+                System.out.println(Colors.ANSI_CYAN + "Meilleure solution : " + Colors.ANSI_RESET + bestSolution);
             }
         }
         return bestDistance;
     }
 
+    public Route getBestSolution() {
+        return bestSolution;
+    }
+
+    public double getBestDistance() {
+        return bestDistance;
+    }
 }

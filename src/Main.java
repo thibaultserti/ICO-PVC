@@ -1,32 +1,15 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import algos.*;
+import gui.GUI;
+
+import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+
+import static gui.Settings.loadFile;
 
 public class Main {
     private static ArrayList<City> cities = new ArrayList<City>();
-
-    public static void loadFile(String path) {
-        try {
-            BufferedReader file_source = new BufferedReader(new FileReader(path));
-            String s = file_source.readLine();
-            System.out.println(s);
-            String[] tab = s.split(",");
-
-            while ((s = file_source.readLine()) != null) {
-                System.out.println(s);
-                tab = s.split(",");
-                cities.add(new City(tab[0], Double.parseDouble(tab[1]), Double.parseDouble(tab[2])));
-            }
-            file_source.close();
-            System.out.println("File opened successfully");
-        } catch (FileNotFoundException e) {
-            System.out.println("Error File Not Found !");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public static void testRS() {
         System.out.println("Test de l'algorithme Recuit-Simulé :");
@@ -38,7 +21,8 @@ public class Main {
         double distanceOpt = (new Route(cities)).getTotalDistance();
         System.out.println("La distance optimale est : " + distanceOpt);
     }
-    public static void testTaboo(){
+
+    public static void testTaboo() {
         System.out.println("Test de l'algorithme Tabou :");
         Route route = new Route(cities);
         System.out.println(cities);
@@ -61,10 +45,14 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        loadFile("cities.csv");
-        //testAG();
-        //testRS();
-        //testTaboo();
+        if ((args.length != 0) && Arrays.asList(args).contains("--gui")) {
+            JFrame GUI = new GUI();
+        } else {
+            cities = loadFile("cities.csv");
+            //testAG();
+            //testRS();
+            //testTaboo();
+        }
     }
 
 }
