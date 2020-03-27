@@ -2,7 +2,6 @@ package gui;
 
 import algos.City;
 import algos.Route;
-import jdk.internal.util.xml.impl.Pair;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

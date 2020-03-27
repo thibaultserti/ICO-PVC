@@ -4,7 +4,6 @@ import gui.GUI;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
 
 import static gui.Settings.loadFile;
 

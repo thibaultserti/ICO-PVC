@@ -2,7 +2,6 @@ package gui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentEvent;
 
 public class GUI extends JFrame {
     private static final int WIDTH = 1400;
