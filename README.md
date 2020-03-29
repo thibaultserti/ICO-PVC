@@ -21,11 +21,10 @@ L'option `--size` ou `-s` permet de spécifier le nombre de villes à utiliser (
 __Pour compiler et exécuter:__
 
 _Linux:_
-Depuis un terminal, placez-vous dans le dossier principal du projet (où le fichier `Makefile` est présent) et lancez `make build` pour compiler, puis `make run` pour exécuter.
+Depuis un terminal, placez-vous dans le dossier principal du projet (où le fichier `Makefile` est présent) et lancez `make build` pour compiler, puis `make run` pour exécuter en ligne de commande et `make run-gui` pour exécuter avec l'interface graphique.
 
 
 _Windows:_
-Depuis un terminal, placez-vous dans le dossier principal du projet et lancez : `javac -d bin src/*.java`
-Ensuite, placez-vous dans le dossier `bin` avec `cd bin` (obligatoire) et lancez `java Main`. 
-*(Remarque: `cd` et bien une commande DOS)*
+Depuis un terminal, placez-vous dans le dossier principal du projet et lancez : ` javac -d . src/algos/*.java src/gui/*.java src/*.java`
+Ensuite lancez `java Main` pour exécuter le programme en ligne de command et `java Main --gui` pour exécuter avec une interface graphique.  
 
