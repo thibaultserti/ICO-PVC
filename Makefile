@@ -1,5 +1,6 @@
 build:
-	javac -d bin src/*.java
-
+	javac -d . src/algos/*.java src/gui/*.java src/*.java
 run:
-	cd bin ; java Main ; cd ..
+	java Main
+run-gui:
+	java Main --gui
