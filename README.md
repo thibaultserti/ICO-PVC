@@ -1,6 +1,6 @@
 **ICO - Problème du voyageur de commerce**
 
-Le but est de programmer les 3 algorithmes Tabou, Recuit Siulé et Génétique et de les faire coopérer au moyen d'agent.
+Le but est de programmer les 3 algorithmes Tabou, Recuit Simulé et Génétique et de les faire coopérer au moyen d'agent.
 
 __Utilisation:__
 
@@ -26,5 +26,5 @@ Depuis un terminal, placez-vous dans le dossier principal du projet (où le fich
 
 _Windows:_
 Depuis un terminal, placez-vous dans le dossier principal du projet et lancez : ` javac -d . src/algos/*.java src/gui/*.java src/*.java`
-Ensuite lancez `java Main` pour exécuter le programme en ligne de command et `java Main --gui` pour exécuter avec une interface graphique.  
+Ensuite lancez `java Main` pour exécuter le programme en ligne de commande et `java Main --gui` pour exécuter avec une interface graphique.
 
