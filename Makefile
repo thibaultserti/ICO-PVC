@@ -1,6 +1,6 @@
 build:
-	javac -d . src/algos/*.java src/gui/*.java src/*.java
+	javac -classpath "lib/*.jar":"src/*.java" -d bin src/*.java src/algos/*.java src/gui/*.java
 run:
-	java Main
+	java -classpath bin Main
 run-gui:
-	java Main --gui
+	java -classpath bin Main --gui

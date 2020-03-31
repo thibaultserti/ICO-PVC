@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Settings {
+    
     public static ArrayList<City> loadFile(String path) {
         ArrayList<City> cities = new ArrayList<City>();
         try {
