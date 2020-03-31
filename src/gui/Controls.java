@@ -45,7 +45,7 @@ public class Controls extends JPanel {
         // Titre
         this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black),
                 "Options de configuration", TitledBorder.CENTER, TitledBorder.TOP, new Font("Arial", Font.BOLD, 20)));
-        this.setPreferredSize(new Dimension(400, 1000));
+        this.setPreferredSize(new Dimension(400, 800));
 
         // Choix du nombre de villes
         JPanel panNbCities = new JPanel();

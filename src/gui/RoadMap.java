@@ -24,7 +24,7 @@ public class RoadMap extends JPanel {
 
     public RoadMap() {
         super();
-        this.setPreferredSize(new Dimension(1000, 1000));
+        this.setPreferredSize(new Dimension(800, 800));
     }
 
     public void paintComponent(Graphics g) {
