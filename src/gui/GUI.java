@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GUI extends JFrame {
-    private static final int WIDTH = 1400;
-    private static final int HEIGHT = 1025;
+    private static final int WIDTH = 1300;
+    private static final int HEIGHT = 900;
 
     public GUI() {
         this.setTitle("Problème du voyageur de commerce");
