@@ -121,12 +121,12 @@ case $size in
   ;;
 esac
 
-# Téléchargment des villes
+# Téléchargement des villes
 
-name="cities${#tab[@]}.csv"
+name="data/cities${#tab[@]}.csv"
 
 if [ ! -e "$name" ]; then
-  rm cities.csv
+  rm data/cities.csv
   echo "ville,x,y" >>"$name"
 
   for city in ${tab[*]}; do
@@ -140,4 +140,4 @@ if [ ! -e "$name" ]; then
 
   echo "Toutes les villes ont été téléchargées correctement ! "
 fi
-cp "$name" cities.csv
+cp "$name" data/cities.csv

@@ -398,7 +398,7 @@ public class Controls extends JPanel {
 
         // Listener bouton LoadFile
         loadButton.addActionListener(arg0 -> {
-            cities = loadFile("cities.csv");
+            cities = loadFile("data/cities.csv");
             setCities(cities);
         });
 

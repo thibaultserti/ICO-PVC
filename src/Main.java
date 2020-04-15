@@ -47,7 +47,7 @@ public class Main {
         if ((args.length != 0) && Arrays.asList(args).contains("--gui")) {
             JFrame GUI = new GUI();
         } else {
-            cities = loadFile("cities.csv");
+            cities = loadFile("data/cities.csv");
             testAG();
             testRS();
             testTaboo();
