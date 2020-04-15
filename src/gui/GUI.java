@@ -14,6 +14,7 @@ public class GUI extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         Image icon = Toolkit.getDefaultToolkit().getImage("img/france.png");
+        //System.out.println(System.getProperty("user.dir"));
         this.setIconImage(icon);
 
         RoadMap roadMap = new RoadMap();

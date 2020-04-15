@@ -1,3 +1,4 @@
+#####
 
 # Created by https://www.gitignore.io/api/code,java,intellij
 # Edit at https://www.gitignore.io/?templates=code,java,intellij
@@ -113,7 +114,6 @@ fabric.properties
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.nar
 *.ear

@@ -48,9 +48,9 @@ public class Main {
             JFrame GUI = new GUI();
         } else {
             cities = loadFile("cities.csv");
-            //testAG();
-            //testRS();
-            //testTaboo();
+            testAG();
+            testRS();
+            testTaboo();
         }
     }
 

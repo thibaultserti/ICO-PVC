@@ -25,6 +25,6 @@ Depuis un terminal, placez-vous dans le dossier principal du projet (où le fich
 
 
 _Windows:_
-Depuis un terminal, placez-vous dans le dossier principal du projet et lancez : ` javac -d . src/algos/*.java src/gui/*.java src/*.java`
-Ensuite lancez `java Main` pour exécuter le programme en ligne de commande et `java Main --gui` pour exécuter avec une interface graphique.
+Depuis un terminal, placez-vous dans le dossier principal du projet et lancez : `javac -classpath "lib/*.jar":"src/*.java" -d bin src/*.java src/algos/*.java src/gui/*.java`
+Ensuite lancez `java -classpath bin Main` pour exécuter le programme en ligne de commande et `java -classpath bin Main --gui` pour exécuter avec une interface graphique.
 

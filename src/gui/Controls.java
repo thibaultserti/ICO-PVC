@@ -82,7 +82,7 @@ public class Controls extends JPanel {
         panAlgos.setPreferredSize(new Dimension(350, 150));
         panAlgos.setLayout(new GridLayout(3, 1));
         algo1RadioButton = new JRadioButton("Algorithme Tabou");
-        //algo1RadioButton.setSelected(true);
+        algo1RadioButton.setSelected(true);
         algo2RadioButton = new JRadioButton("Algorithme Recuit-Simulé");
         algo3RadioButton = new JRadioButton("Algorithme Génétique");
 
@@ -241,7 +241,7 @@ public class Controls extends JPanel {
         // --------- Résultats ----------
         JPanel panResult = new JPanel();
         panResult.setBorder(BorderFactory.createTitledBorder("Résultats"));
-        panResult.setPreferredSize(new Dimension(380, 300));
+        panResult.setPreferredSize(new Dimension(380, 120));
         JLabel labelBestDistance = new JLabel("Meilleure distance trouvée : -------");
         JLabel labelBestSolution = new JLabel("Meilleure solution trouvée : -------");
         panResult.add(labelBestDistance);
