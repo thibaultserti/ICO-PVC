@@ -36,7 +36,8 @@ public class Route {
     }
 
     public void swapCities(int a,int b) {
-        previousCities = cities;
+        previousCities.clear();
+        previousCities.addAll(cities);
         City x = cities.get(a);
         City y = cities.get(b);
         cities.set(a, y);
@@ -50,7 +51,8 @@ public class Route {
     }
 
     public void revertSwap() {
-        cities = previousCities;
+        cities.clear();
+        cities.addAll(previousCities);
     }
 
     public int generateRandomIndex() {
