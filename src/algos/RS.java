@@ -6,9 +6,9 @@ import java.util.Collections;
 public class RS {
     private Route route;
 
-    private double startingTemperature;
-    private double numberOfIterations;
-    private double coolingRate;
+    private final double startingTemperature;
+    private final double numberOfIterations;
+    private final double coolingRate;
 
     private Route bestSolution = null;
     private double bestDistance = Double.POSITIVE_INFINITY;
