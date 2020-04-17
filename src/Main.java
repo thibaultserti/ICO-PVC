@@ -1,5 +1,6 @@
 import algos.*;
 import gui.GUI;
+import tests.Test;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -40,7 +41,11 @@ public class Main {
     public static void main(String[] args) {
         if ((args.length != 0) && Arrays.asList(args).contains("--gui")) {
             JFrame GUI = new GUI();
-        } else {
+        } else if ((args.length != 0) && Arrays.asList(args).contains("--benchmark")){
+            Test test = new Test();
+            test.run(10);
+        }
+        else {
             cities = loadFile("data/cities.csv");
             //testAG();
             //testRS();
