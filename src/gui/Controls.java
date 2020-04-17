@@ -22,7 +22,7 @@ public class Controls extends JPanel {
     private JRadioButton algo1RadioButton, algo2RadioButton, algo3RadioButton;
     private RoadMap roadMap;
     private ArrayList<City> cities;
-    private int nbCities = 7;
+    private int nbCities = 10;
 
     // Tabu paramètres d'initialisation
     int numberOfIterationsTabu = 500;
@@ -55,13 +55,12 @@ public class Controls extends JPanel {
 
         JSlider slideNbCities = new JSlider();
         JLabel labelNbCities = new JLabel("Nombre de villes : " + nbCities);
-        slideNbCities.setMaximum(30);
-        slideNbCities.setMinimum(5);
-        slideNbCities.setValue(nbCities);
+        slideNbCities.setMaximum(20);
+        slideNbCities.setMinimum(1);
+        slideNbCities.setValue((int) nbCities/10);
         slideNbCities.setPaintTicks(true);
-        slideNbCities.setPaintLabels(true);
         slideNbCities.setMinorTickSpacing(1);
-        slideNbCities.setMajorTickSpacing(5);
+        slideNbCities.setMajorTickSpacing(2);
         panNbCities.add(labelNbCities);
         panNbCities.add(slideNbCities);
         this.add(panNbCities, BorderLayout.NORTH);
@@ -73,8 +72,8 @@ public class Controls extends JPanel {
         panData.setLayout(new GridLayout(1, 2));
         JButton loadButton = new JButton("<html>Charger les données depuis le CSV</html>");
         JButton scriptButton = new JButton("<html>Exécuter le script de récupération de données</html>");
-        panData.add(loadButton);
         panData.add(scriptButton);
+        panData.add(loadButton);
         this.add(panData, BorderLayout.NORTH);
 
         // Choix de l'algorithme
@@ -98,7 +97,7 @@ public class Controls extends JPanel {
 
         // -----Configurations des algorithmes-----
         JPanel panConfig = new JPanel();
-        panConfig.setBorder(BorderFactory.createTitledBorder("Choix des algorithmes"));
+        panConfig.setBorder(BorderFactory.createTitledBorder("Configuration des algorithmes"));
         panConfig.setPreferredSize(new Dimension(350, 240));
         this.add(panConfig, BorderLayout.NORTH);
 
@@ -126,7 +125,6 @@ public class Controls extends JPanel {
         slideTabuListMaxSize.setMinimum(0);
         slideTabuListMaxSize.setValue((int) tabuListMaxSize);
         slideTabuListMaxSize.setPaintTicks(true);
-        slideTabuListMaxSize.setPaintLabels(true);
         slideTabuListMaxSize.setMinorTickSpacing(1);
         slideTabuListMaxSize.setMajorTickSpacing(2);
         slideTabuListMaxSize.addChangeListener(new ChangeListener() {
@@ -177,7 +175,6 @@ public class Controls extends JPanel {
         slideCoolingRate.setMinimum(950);
         slideCoolingRate.setValue(((int) (coolingRate * 1000)));
         slideCoolingRate.setPaintTicks(true);
-        slideStartingTemperature.setPaintLabels(true);
         slideCoolingRate.setMinorTickSpacing(5);
         slideCoolingRate.setMajorTickSpacing(10);
         slideCoolingRate.addChangeListener(new ChangeListener() {
@@ -446,8 +443,8 @@ public class Controls extends JPanel {
         // Listener Slider nombre de villes
         slideNbCities.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent event) {
-                labelNbCities.setText("Nombre de villes : " + ((JSlider) event.getSource()).getValue());
-                nbCities = ((JSlider) event.getSource()).getValue();
+                labelNbCities.setText("Nombre de villes : " + ((JSlider) event.getSource()).getValue()*10);
+                nbCities = ((JSlider) event.getSource()).getValue() * 10;
             }
         });
     }
