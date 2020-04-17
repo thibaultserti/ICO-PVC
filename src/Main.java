@@ -17,8 +17,6 @@ public class Main {
         RS rs = new RS(route);
         double bestDistance = rs.run();
         System.out.println("La meilleure distance trouvée est : " + bestDistance);
-        double distanceOpt = (new Route(cities)).getTotalDistance();
-        System.out.println("La distance optimale est : " + distanceOpt);
     }
 
     public static void testTabu() {
@@ -28,8 +26,6 @@ public class Main {
         Tabu tabu = new Tabu(route);
         double bestDistance = tabu.run();
         System.out.println("La meilleure distance trouvée est : " + bestDistance);
-        double distanceOpt = (new Route(cities)).getTotalDistance();
-        System.out.println("La distance optimale est : " + distanceOpt);
     }
 
     public static void testAG() {
@@ -39,8 +35,6 @@ public class Main {
         AG ag = new AG(route);
         double bestDistance = ag.run();
         System.out.println("La meilleure distance trouvée est : " + bestDistance);
-        double distanceOpt = (new Route(cities)).getTotalDistance();
-        System.out.println("La distance optimale est : " + distanceOpt);
     }
 
     public static void main(String[] args) {

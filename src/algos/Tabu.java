@@ -44,7 +44,6 @@ public class Tabu implements Algo{
                 route.revertSwap();
             }
         }
-        System.out.println(neighbors);
         return neighbors;
     }
 
@@ -75,6 +74,15 @@ public class Tabu implements Algo{
             tabuList.add(currentSolution);
             if (tabuList.size() > tabuListMaxSize) {
                 tabuList.remove(0);
+            }
+
+            if (i % 10 == 0) {
+                System.out.println(Colors.ANSI_BLUE + "Iteration #" + i + Colors.ANSI_RESET);
+                System.out.println(Colors.ANSI_CYAN + "Solution : " + Colors.ANSI_RESET + currentSolution);
+                System.out.println(Colors.ANSI_CYAN + "Distance actuelle : " + Colors.ANSI_RESET + currentDistance);
+                System.out.println(Colors.ANSI_CYAN + "Meilleure distance : " + Colors.ANSI_RESET + bestDistance);
+                System.out.println(Colors.ANSI_CYAN + "Meilleure solution : " + Colors.ANSI_RESET + bestSolution);
+
             }
         }
         return bestDistance;

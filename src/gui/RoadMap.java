@@ -59,8 +59,8 @@ public class RoadMap extends JPanel {
     public void drawCity(City city, Graphics g) {
         double x = convert(city)[0];
         double y = convert(city)[1];
-        g.fillOval((int) x, (int) y, 10, 10);
-        g.drawString(city.getName(), (int) x, (int) y);
+        g.fillOval((int) x, (int) y, 5, 5);
+        //g.drawString(city.getName(), (int) x, (int) y);
     }
 
     public void drawRoute(City city1, City city2, Graphics g) {
