@@ -6,7 +6,7 @@ import java.util.Collections;
 import static java.lang.Integer.max;
 import static java.lang.Integer.min;
 
-public class AG {
+public class AG implements Algo{
     private ArrayList<Route> routes = new ArrayList<Route>();
     private Route route;
     private double mutationRate;
