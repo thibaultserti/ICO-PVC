@@ -2,21 +2,31 @@ package gui;
 
 import algos.City;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class Settings {
-    
+
+    public static void writeToFile(String fileName, String text) {
+        try {
+            File file = new File(fileName);
+            FileWriter fw = new FileWriter(file.getAbsoluteFile(),true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(text);
+            bw.close();
+            System.out.println("Done");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static ArrayList<City> loadFile(String path) {
         ArrayList<City> cities = new ArrayList<City>();
         try {
             BufferedReader file_source = new BufferedReader(new FileReader(path));
             String s = file_source.readLine();
             System.out.println(s);
-            String[] tab = s.split(",");
+            String[] tab;
 
             while ((s = file_source.readLine()) != null) {
                 System.out.println(s);

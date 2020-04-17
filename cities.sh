@@ -16,15 +16,18 @@ case $size in
 10)
   tab=("paris" "marseille" "lyon" "toulouse" "nice" "nantes" "montpellier" "strasbourg" "bordeaux" "lille")
   ;;
+
 20)
   tab=("paris" "marseille" "lyon" "toulouse" "nice" "nantes" "montpellier" "strasbourg" "bordeaux" "lille"
   "rennes" "reims" "saint-etienne" "le-havre" "toulon" "grenoble" "dijon" "angers" "nimes" "villeurbanne")
   ;;
+
 30)
   tab=("paris" "marseille" "lyon" "toulouse" "nice" "nantes" "montpellier" "strasbourg" "bordeaux" "lille"
   "rennes" "reims" "saint-etienne" "le-havre" "toulon" "grenoble" "dijon" "angers" "nimes" "villeurbanne"
   "aix-en-provence" "le-mans" "clermond-ferrant" "brest" "tours" "amiens" "limoges" "annecy" "perpignan" "boulogne-billancourt")
   ;;
+
 40)
   tab=("paris" "marseille" "lyon" "toulouse" "nice" "nantes" "montpellier" "strasbourg" "bordeaux" "lille"
   "rennes" "reims" "saint-etienne" "le-havre" "toulon" "grenoble" "dijon" "angers" "nimes" "villeurbanne"
@@ -109,21 +112,6 @@ case $size in
   "cholet" "narbonne" "fontenay-sous-bois" "vannes" "bondy" "frejus" "arles" "satrouville" "clamart" "bobigny")
   ;;
 
-110)
-  tab=("paris" "marseille" "lyon" "toulouse" "nice" "nantes" "montpellier" "strasbourg" "bordeaux" "lille"
-  "rennes" "reims" "saint-etienne" "le-havre" "toulon" "grenoble" "dijon" "angers" "nimes" "villeurbanne"
-  "aix-en-provence" "le-mans" "clermond-ferrant" "brest" "tours" "amiens" "limoges" "annecy" "perpignan" "boulogne-billancourt"
-  "metz" "besancon" "orleans" "argenteuil" "rouen" "mulhouse" "montreuil" "caen" "nancy" "tourcoing"
-  "roubaix" "nanterre" "vitry-sur-seine" "avignon" "creteil" "dunkerque" "poitiers" "aubervilliers" "asnieres-sur-seine" "colombes"
-  "versailles" "aulnay-sous-bois" "courbevoie" "cherbourg-en-cotentin" "rueil-malmaison" "champigny-sur-marne" "pau" "beziers" "la-rochelle" "calais"
-  "saint-maur-des-fosses" "antibes" "cannes" "merignac" "drancy" "colmar" "saint-nazaire" "issy-les-moulineaux" "evry-courcouronnes" "noisy-le-grand"
-  "bourges" "venissieux" "la-seyne-sur-mer" "cergy" "levallois-perret" "quimper" "valence" "villeneuve-d-ascq" "antony" "pessac"
-  "clichy" "ivry-sur-seine" "troyes" "neuilly-sur-seine" "montauban" "chambery" "niort" "sarcelles" "lorient" "beauvais"
-  "le-blanc-mesnil" "hyeres" "epinay-sur-seine" "villejuif" "pantin" "maisons-alfort" "saint-quentin" "meau" "chelles" "la-roche-sur-yon"
-  "cholet" "narbonne" "fontenay-sous-bois" "vannes" "bondy" "frejus" "arles" "satrouville" "clamart" "bobigny"
-  "corbeil-essone" "sevran" "bayonne" "grasse" "massy" "cagnes-sur-mer" "vincennes" "saint-ouen-sur-seine" "laval" "montrouge")
-  ;;
-
 120)
   tab=("paris" "marseille" "lyon" "toulouse" "nice" "nantes" "montpellier" "strasbourg" "bordeaux" "lille"
   "rennes" "reims" "saint-etienne" "le-havre" "toulon" "grenoble" "dijon" "angers" "nimes" "villeurbanne"
@@ -136,8 +124,7 @@ case $size in
   "clichy" "ivry-sur-seine" "troyes" "neuilly-sur-seine" "montauban" "chambery" "niort" "sarcelles" "lorient" "beauvais"
   "le-blanc-mesnil" "hyeres" "epinay-sur-seine" "villejuif" "pantin" "maisons-alfort" "saint-quentin" "meau" "chelles" "la-roche-sur-yon"
   "cholet" "narbonne" "fontenay-sous-bois" "vannes" "bondy" "frejus" "arles" "satrouville" "clamart" "bobigny"
-  "corbeil-essone" "sevran" "bayonne" "grasse" "massy" "cagnes-sur-mer" "vincennes" "saint-ouen-sur-seine" "laval" "montrouge"
-  "albi" "belfort" "evreux" "martigues" "suresnes" "vaulx-en-velvin" "brive-la-gaillarde" "charleville-mezieres" "gennevilliers" "saint-herblain")
+  "corbeil-essone" "sevran" "bayonne" "grasse" "massy" "cagnes-sur-mer" "vincennes" "saint-ouen-sur-seine" "laval" "montrouge")
   ;;
 
 130)
@@ -153,8 +140,7 @@ case $size in
   "le-blanc-mesnil" "hyeres" "epinay-sur-seine" "villejuif" "pantin" "maisons-alfort" "saint-quentin" "meau" "chelles" "la-roche-sur-yon"
   "cholet" "narbonne" "fontenay-sous-bois" "vannes" "bondy" "frejus" "arles" "satrouville" "clamart" "bobigny"
   "corbeil-essone" "sevran" "bayonne" "grasse" "massy" "cagnes-sur-mer" "vincennes" "saint-ouen-sur-seine" "laval" "montrouge"
-  "albi" "belfort" "evreux" "martigues" "suresnes" "vaulx-en-velvin" "brive-la-gaillarde" "charleville-mezieres" "gennevilliers" "saint-herblain"
-  "saint-malo" "carcassonne" "saint-priest" "blois" "salon-de-provence" "chalon-sur-saone" "rosny-sous-bois" "meudon" "aubagne" "saint-brieuc")
+  "albi" "belfort" "evreux" "martigues" "suresnes" "vaulx-en-velvin" "brive-la-gaillarde" "charleville-mezieres" "gennevilliers" "saint-herblain")
   ;;
 
 140)

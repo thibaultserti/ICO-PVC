@@ -76,7 +76,7 @@ public class Tabu implements Algo{
                 tabuList.remove(0);
             }
 
-            if (i % 10 == 0) {
+            if (i % 100 == 0) {
                 System.out.println(Colors.ANSI_BLUE + "Iteration #" + i + Colors.ANSI_RESET);
                 System.out.println(Colors.ANSI_CYAN + "Solution : " + Colors.ANSI_RESET + currentSolution);
                 System.out.println(Colors.ANSI_CYAN + "Distance actuelle : " + Colors.ANSI_RESET + currentDistance);
