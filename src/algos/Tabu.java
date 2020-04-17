@@ -3,7 +3,7 @@ package algos;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Tabu {
+public class Tabu implements Algo{
     private Route route;
     private final int numberOfIterations;
     private final int tabuListMaxSize;

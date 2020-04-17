@@ -131,7 +131,7 @@ public class Controls extends JPanel {
         slideTabuListMaxSize.setMajorTickSpacing(2);
         slideTabuListMaxSize.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent event) {
-                labelTabuListMaxSize.setText("Température initiale : " + ((JSlider) event.getSource()).getValue());
+                labelTabuListMaxSize.setText("Taille max tabou : " + ((JSlider) event.getSource()).getValue());
                 tabuListMaxSize = ((JSlider) event.getSource()).getValue();
             }
         });

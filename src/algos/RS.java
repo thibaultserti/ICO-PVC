@@ -3,7 +3,7 @@ package algos;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class RS {
+public class RS implements Algo{
     private Route route;
 
     private final double startingTemperature;
