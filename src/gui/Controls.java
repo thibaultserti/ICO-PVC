@@ -24,8 +24,9 @@ public class Controls extends JPanel {
     private ArrayList<City> cities;
     private int nbCities = 7;
 
-    // Taboo paramètres d'initialisation
-    int numberOfIterationsTaboo = 500;
+    // Tabu paramètres d'initialisation
+    int numberOfIterationsTabu = 500;
+    int tabuListMaxSize = 3;
 
     // Recuit-Simulé paramètres d'initialisation
     double startingTemperature = 10;
@@ -101,20 +102,37 @@ public class Controls extends JPanel {
         panConfig.setPreferredSize(new Dimension(350, 240));
         this.add(panConfig, BorderLayout.NORTH);
 
-        // Taboo
+        // Tabu
         // Slide Nb iterations
-        JLabel labelNbIterationsTaboo = new JLabel("Nombre d'itérations : " + numberOfIterationsTaboo);
-        JSlider slideNbIterationsTaboo = new JSlider();
-        slideNbIterationsTaboo.setMaximum(1000);
-        slideNbIterationsTaboo.setMinimum(100);
-        slideNbIterationsTaboo.setValue(numberOfIterationsTaboo);
-        slideNbIterationsTaboo.setPaintTicks(true);
-        slideNbIterationsTaboo.setMinorTickSpacing(50);
-        slideNbIterationsTaboo.setMajorTickSpacing(100);
-        slideNbIterationsTaboo.addChangeListener(new ChangeListener() {
+        JLabel labelNbIterationsTabu = new JLabel("Nombre d'itérations : " + numberOfIterationsTabu);
+        JSlider slideNbIterationsTabu = new JSlider();
+        slideNbIterationsTabu.setMaximum(1000);
+        slideNbIterationsTabu.setMinimum(100);
+        slideNbIterationsTabu.setValue(numberOfIterationsTabu);
+        slideNbIterationsTabu.setPaintTicks(true);
+        slideNbIterationsTabu.setMinorTickSpacing(50);
+        slideNbIterationsTabu.setMajorTickSpacing(100);
+        slideNbIterationsTabu.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent event) {
-                labelNbIterationsTaboo.setText("Nombre d'itérations : " + ((JSlider) event.getSource()).getValue());
-                numberOfIterationsTaboo = ((JSlider) event.getSource()).getValue();
+                labelNbIterationsTabu.setText("Nombre d'itérations : " + ((JSlider) event.getSource()).getValue());
+                numberOfIterationsTabu = ((JSlider) event.getSource()).getValue();
+            }
+        });
+
+        // Slide TabuListMaxSize
+        JLabel labelTabuListMaxSize = new JLabel("Taille max tabou : " + tabuListMaxSize);
+        JSlider slideTabuListMaxSize = new JSlider();
+        slideTabuListMaxSize.setMaximum(10);
+        slideTabuListMaxSize.setMinimum(0);
+        slideTabuListMaxSize.setValue((int) tabuListMaxSize);
+        slideTabuListMaxSize.setPaintTicks(true);
+        slideTabuListMaxSize.setPaintLabels(true);
+        slideTabuListMaxSize.setMinorTickSpacing(1);
+        slideTabuListMaxSize.setMajorTickSpacing(2);
+        slideTabuListMaxSize.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent event) {
+                labelTabuListMaxSize.setText("Température initiale : " + ((JSlider) event.getSource()).getValue());
+                tabuListMaxSize = ((JSlider) event.getSource()).getValue();
             }
         });
 
@@ -140,7 +158,7 @@ public class Controls extends JPanel {
         JSlider slideStartingTemperature = new JSlider();
         slideStartingTemperature.setMaximum(50);
         slideStartingTemperature.setMinimum(0);
-        slideStartingTemperature.setValue((int)startingTemperature);
+        slideStartingTemperature.setValue((int) startingTemperature);
         slideStartingTemperature.setPaintTicks(true);
         slideStartingTemperature.setPaintLabels(true);
         slideStartingTemperature.setMinorTickSpacing(5);
@@ -157,15 +175,15 @@ public class Controls extends JPanel {
         JSlider slideCoolingRate = new JSlider();
         slideCoolingRate.setMaximum(1000);
         slideCoolingRate.setMinimum(950);
-        slideCoolingRate.setValue(((int)(coolingRate*1000)));
+        slideCoolingRate.setValue(((int) (coolingRate * 1000)));
         slideCoolingRate.setPaintTicks(true);
         slideStartingTemperature.setPaintLabels(true);
         slideCoolingRate.setMinorTickSpacing(5);
         slideCoolingRate.setMajorTickSpacing(10);
         slideCoolingRate.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent event) {
-                labelCoolingRate.setText("Taux de refroidissement : " + (double)((JSlider) event.getSource()).getValue() / 1000.0);
-                coolingRate = (double)((JSlider) event.getSource()).getValue() / 1000.0;
+                labelCoolingRate.setText("Taux de refroidissement : " + (double) ((JSlider) event.getSource()).getValue() / 1000.0);
+                coolingRate = (double) ((JSlider) event.getSource()).getValue() / 1000.0;
             }
         });
 
@@ -223,14 +241,14 @@ public class Controls extends JPanel {
         JSlider slideMutationRate = new JSlider();
         slideMutationRate.setMaximum(20);
         slideMutationRate.setMinimum(0);
-        slideMutationRate.setValue((int)(mutationRate*1000));
+        slideMutationRate.setValue((int) (mutationRate * 1000));
         slideMutationRate.setPaintTicks(true);
         slideMutationRate.setMinorTickSpacing(1);
         slideMutationRate.setMajorTickSpacing(5);
         slideMutationRate.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent event) {
                 labelMutationRate.setText("Taux de mutation: " + (double) ((JSlider) event.getSource()).getValue() / 1000.0);
-                mutationRate = (double)((JSlider) event.getSource()).getValue() / 1000.0;
+                mutationRate = (double) ((JSlider) event.getSource()).getValue() / 1000.0;
             }
         });
 
@@ -250,7 +268,7 @@ public class Controls extends JPanel {
 
         // Listener RadioBox choix des algorithmes
 
-        // Algo Tabou
+        // Algo Tabu
         algo1RadioButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 // On retire les slides précédentes
@@ -268,12 +286,16 @@ public class Controls extends JPanel {
                 panConfig.remove(slideStartingTemperature);
                 panConfig.remove(labelCoolingRate);
                 panConfig.remove(slideCoolingRate);
-                panConfig.remove(labelNbIterationsTaboo);
-                panConfig.remove(slideNbIterationsTaboo);
+                panConfig.remove(labelNbIterationsTabu);
+                panConfig.remove(slideNbIterationsTabu);
+                panConfig.remove(labelTabuListMaxSize);
+                panConfig.remove(slideTabuListMaxSize);
 
                 // ajoute les nouvelles
-                panConfig.add(labelNbIterationsTaboo);
-                panConfig.add(slideNbIterationsTaboo);
+                panConfig.add(labelNbIterationsTabu);
+                panConfig.add(slideNbIterationsTabu);
+                panConfig.add(labelTabuListMaxSize);
+                panConfig.add(slideTabuListMaxSize);
                 panConfig.updateUI();
             }
         });
@@ -296,8 +318,10 @@ public class Controls extends JPanel {
                 panConfig.remove(slideStartingTemperature);
                 panConfig.remove(labelCoolingRate);
                 panConfig.remove(slideCoolingRate);
-                panConfig.remove(labelNbIterationsTaboo);
-                panConfig.remove(slideNbIterationsTaboo);
+                panConfig.remove(labelNbIterationsTabu);
+                panConfig.remove(slideNbIterationsTabu);
+                panConfig.remove(labelTabuListMaxSize);
+                panConfig.remove(slideTabuListMaxSize);
 
                 //On ajoutes les nouvelles
                 panConfig.add(labelNbIterationsRS);
@@ -328,8 +352,10 @@ public class Controls extends JPanel {
                 panConfig.remove(slideStartingTemperature);
                 panConfig.remove(labelCoolingRate);
                 panConfig.remove(slideCoolingRate);
-                panConfig.remove(labelNbIterationsTaboo);
-                panConfig.remove(slideNbIterationsTaboo);
+                panConfig.remove(labelNbIterationsTabu);
+                panConfig.remove(slideNbIterationsTabu);
+                panConfig.remove(labelTabuListMaxSize);
+                panConfig.remove(slideTabuListMaxSize);
 
                 //On ajoutes les nouvelles
                 panConfig.add(labelNbIterationsAG);
@@ -351,7 +377,7 @@ public class Controls extends JPanel {
                 Route bestSolution;
 
                 if (algo1RadioButton.isSelected()) {
-                    bestSolution = runTabou();
+                    bestSolution = runTabu();
                 } else if (algo2RadioButton.isSelected()) {
                     bestSolution = runRS();
                 } else {
@@ -374,23 +400,23 @@ public class Controls extends JPanel {
                 setRoute(bestSolution);
             }
 
-            public Route runTabou() {
+            public Route runTabu() {
                 Route route = new Route(cities);
-                Taboo taboo = new Taboo(route,numberOfIterationsTaboo);
-                double bestDistance = taboo.run();
-                return taboo.getBestSolution();
+                Tabu Tabu = new Tabu(route, numberOfIterationsTabu, tabuListMaxSize);
+                double bestDistance = Tabu.run();
+                return Tabu.getBestSolution();
             }
 
             public Route runAG() {
                 Route route = new Route(cities);
-                AG ag = new AG(route,mutationRate,arenaSize,numberOfIterationsAG,populationSize);
+                AG ag = new AG(route, mutationRate, arenaSize, numberOfIterationsAG, populationSize);
                 double bestDistance = ag.run();
                 return ag.getBestSolution();
             }
 
             public Route runRS() {
                 Route route = new Route(cities);
-                RS rs = new RS(route,startingTemperature,numberOfIterationsRS,coolingRate);
+                RS rs = new RS(route, startingTemperature, numberOfIterationsRS, coolingRate);
                 double bestDistance = rs.run();
                 return rs.getBestSolution();
             }
