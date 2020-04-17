@@ -1,6 +1,7 @@
 package gui;
 
 import algos.*;
+import conf.Defaults;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -15,7 +16,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.StringJoiner;
 
-import static gui.Settings.loadFile;
+import static conf.Settings.loadFile;
 
 
 public class Controls extends JPanel {
@@ -25,19 +26,19 @@ public class Controls extends JPanel {
     private int nbCities = 10;
 
     // Tabu paramètres d'initialisation
-    int numberOfIterationsTabu = 500;
-    int tabuListMaxSize = 3;
+    int numberOfIterationsTabu = Defaults.numberOfIterationsTabu;
+    int tabuListMaxSize = Defaults.tabuListMaxSize;
 
     // Recuit-Simulé paramètres d'initialisation
-    double startingTemperature = 10;
-    int numberOfIterationsRS = 1000;
-    double coolingRate = 0.99;
+    double startingTemperature = Defaults.startingTemperature;
+    int numberOfIterationsRS = Defaults.numberOfIterationsRS;
+    double coolingRate = Defaults.coolingRate;
 
     // Génétique paramètres d'initialisation
-    double mutationRate = 0.015;
-    int arenaSize = 5;
-    int numberOfIterationsAG = 100;
-    int populationSize = 50;
+    double mutationRate = Defaults.mutationRate;
+    int arenaSize = Defaults.arenaSize;
+    int numberOfIterationsAG = Defaults.numberOfIterationsAG;
+    int populationSize = Defaults.populationSize;
 
     public Controls(RoadMap roadMap) {
         super();

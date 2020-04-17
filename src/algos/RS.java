@@ -1,5 +1,8 @@
 package algos;
 
+import conf.Colors;
+import conf.Defaults;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -7,16 +10,16 @@ public class RS implements Algo {
     private Route route;
 
     private final double startingTemperature;
-    private final double numberOfIterations;
+    private final int numberOfIterations;
     private final double coolingRate;
 
     private Route bestSolution = null;
     private double bestDistance = Double.POSITIVE_INFINITY;
 
     public RS() {
-        startingTemperature = 10;
-        numberOfIterations = 1000;
-        coolingRate = 0.99;
+        startingTemperature = Defaults.startingTemperature;
+        numberOfIterations = Defaults.numberOfIterationsRS;
+        coolingRate = Defaults.coolingRate;
     }
 
     public RS(Route route) {
@@ -32,7 +35,7 @@ public class RS implements Algo {
 
     }
 
-    public RS(Route route, double startingTemperature, double numberOfIterations, double coolingRate) {
+    public RS(Route route, double startingTemperature, int numberOfIterations, double coolingRate) {
         this.route = route;
         Collections.shuffle(this.route.getCities());
         this.startingTemperature = startingTemperature;
@@ -40,7 +43,7 @@ public class RS implements Algo {
         this.coolingRate = coolingRate;
     }
 
-    public RS(ArrayList<City> cities, double startingTemperature, double numberOfIterations, double coolingRate) {
+    public RS(ArrayList<City> cities, double startingTemperature, int numberOfIterations, double coolingRate) {
         this.route = new Route(cities);
         Collections.shuffle(this.route.getCities());
         this.startingTemperature = startingTemperature;

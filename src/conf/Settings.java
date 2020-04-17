@@ -1,4 +1,4 @@
-package gui;
+package conf;
 
 import algos.City;
 
@@ -14,7 +14,6 @@ public class Settings {
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write(text);
             bw.close();
-            System.out.println("Done");
         } catch (IOException e) {
             e.printStackTrace();
         }

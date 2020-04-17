@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static gui.Settings.loadFile;
+import static conf.Settings.loadFile;
 
 public class Main {
     private static ArrayList<City> cities = new ArrayList<City>();

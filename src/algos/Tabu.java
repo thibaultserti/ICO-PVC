@@ -1,5 +1,8 @@
 package algos;
 
+import conf.Colors;
+import conf.Defaults;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -12,8 +15,8 @@ public class Tabu implements Algo{
     private double bestDistance = Double.POSITIVE_INFINITY;
 
     public Tabu() {
-        tabuListMaxSize = 3;
-        numberOfIterations = 1000;
+        tabuListMaxSize = Defaults.tabuListMaxSize;
+        numberOfIterations = Defaults.numberOfIterationsTabu;
     }
 
     public Tabu(Route route) {

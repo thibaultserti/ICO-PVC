@@ -1,18 +1,22 @@
 package tests;
 
 import algos.*;
+import conf.Defaults;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import static gui.Settings.loadFile;
-import static gui.Settings.writeToFile;
+import static conf.Settings.loadFile;
+import static conf.Settings.writeToFile;
 
 // to execute this class you need to have all cities10.csv to cities200.csv downloaded
 public class Test {
     private static ArrayList<City> cities = new ArrayList<>();
 
     private final double startingTemperature;
-    private final double numberOfIterationsRS;
+    private final int numberOfIterationsRS;
     private final double coolingRate;
 
     private final double mutationRate;
@@ -24,21 +28,21 @@ public class Test {
     private final int tabuListMaxSize;
 
     public Test() {
-        startingTemperature = 10;
-        numberOfIterationsRS = 1000;
-        coolingRate = 0.99;
+        startingTemperature = Defaults.startingTemperature;
+        numberOfIterationsRS = Defaults.numberOfIterationsRS;
+        coolingRate = Defaults.coolingRate;
 
-        mutationRate = 0.015;
-        arenaSize = 5;
-        numberOfIterationsAG = 100;
-        populationSize = 50;
+        mutationRate = Defaults.mutationRate;
+        arenaSize = Defaults.arenaSize;
+        numberOfIterationsAG = Defaults.numberOfIterationsAG;
+        populationSize = Defaults.populationSize;
 
-        tabuListMaxSize = 3;
-        numberOfIterationsTabu = 1000;
+        tabuListMaxSize = Defaults.tabuListMaxSize;
+        numberOfIterationsTabu = Defaults.numberOfIterationsTabu;
     }
 
     public Test(double startingTemperature,
-                double numberOfIterationsRS,
+                int numberOfIterationsRS,
                 double coolingRate,
                 double mutationRate,
                 int arenaSize,
@@ -88,7 +92,17 @@ public class Test {
     }
 
     public void run(int nbTests) {
-
+        try {
+            Process proc = Runtime.getRuntime().exec("rm -f data/ag.csv data/rs.csv dgit stabu.csv");
+            System.out.println("toto");
+            BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+            String s = null;
+            while ((s = stdInput.readLine()) != null) {
+                System.out.println(s);
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
         for (int i = 10; i <= 10; i += 10) {
             String file = "data/cities" + i + ".csv";
             for (int j = 0; j < nbTests; j++) {

@@ -1,5 +1,8 @@
 package algos;
 
+import conf.Colors;
+import conf.Defaults;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -18,10 +21,10 @@ public class AG implements Algo{
     private double bestDistance = Double.POSITIVE_INFINITY;
 
     public AG() {
-        mutationRate = 0.015;
-        arenaSize = 5;
-        numberOfIterations = 100;
-        populationSize = 50;
+        mutationRate = Defaults.mutationRate;
+        arenaSize = Defaults.arenaSize;
+        numberOfIterations = Defaults.numberOfIterationsAG;
+        populationSize = Defaults.populationSize;
     }
 
     public AG(Route route) {
