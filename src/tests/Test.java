@@ -41,15 +41,9 @@ public class Test {
         numberOfIterationsTabu = Defaults.numberOfIterationsTabu;
     }
 
-    public Test(double startingTemperature,
-                int numberOfIterationsRS,
-                double coolingRate,
-                double mutationRate,
-                int arenaSize,
-                int populationSize,
-                int numberOfIterationsAG,
-                int numberOfIterationsTabu,
-                int tabuListMaxSize) {
+    public Test(double startingTemperature, int numberOfIterationsRS, double coolingRate, double mutationRate,
+            int arenaSize, int populationSize, int numberOfIterationsAG, int numberOfIterationsTabu,
+            int tabuListMaxSize) {
         this.startingTemperature = startingTemperature;
         this.numberOfIterationsRS = numberOfIterationsRS;
         this.coolingRate = coolingRate;
@@ -62,33 +56,33 @@ public class Test {
     }
 
     private double[] testRS(String file) {
-        cities = loadFile(file,false);
+        cities = loadFile(file, false);
         Route route = new Route(cities);
         RS rs = new RS(route, startingTemperature, numberOfIterationsRS, coolingRate);
         long startTime = System.nanoTime();
         double bestDistance = rs.run(false);
         long stopTime = System.nanoTime();
-        return new double[]{bestDistance, stopTime - startTime};
+        return new double[] { bestDistance, stopTime - startTime };
     }
 
     private double[] testAG(String file) {
-        cities = loadFile(file,false);
+        cities = loadFile(file, false);
         Route route = new Route(cities);
         AG ag = new AG(route, mutationRate, arenaSize, numberOfIterationsAG, populationSize);
         long startTime = System.nanoTime();
         double bestDistance = ag.run(false);
         long stopTime = System.nanoTime();
-        return new double[]{bestDistance, stopTime - startTime};
+        return new double[] { bestDistance, stopTime - startTime };
     }
 
     private double[] testTabu(String file) {
-        cities = loadFile(file,false);
+        cities = loadFile(file, false);
         Route route = new Route(cities);
         Tabu tabu = new Tabu(route, numberOfIterationsTabu, tabuListMaxSize);
         long startTime = System.nanoTime();
         double bestDistance = tabu.run(false);
         long stopTime = System.nanoTime();
-        return new double[]{bestDistance, stopTime - startTime};
+        return new double[] { bestDistance, stopTime - startTime };
     }
 
     public void run(int nbTests) {
@@ -102,25 +96,69 @@ public class Test {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        for (int i = 10; i <= 200; i += 10) {
-            String file = "data/cities" + i + ".csv";
-            for (int j = 0; j < nbTests; j++) {
-                double percent = (double) (i-10) / 2. + (double) (j*5)/nbTests;
-                System.out.println("Pourcentage d'avancement : " + percent + "%");
-                double[] res1;
-                double[] res2;
-                double[] res3;
-
-                res1 = testAG(file);
-                res2 = testRS(file);
-                res3 = testTabu(file);
-
-                writeToFile("data/ag.csv", i + ";" + res1[0] + ";" + res1[1] / 1000 + "\n");
-                writeToFile("data/rs.csv", i + ";" + res2[0] + ";" + res2[1] / 1000 + "\n");
-                writeToFile("data/tabu.csv", i + ";" + res3[0] + ";" + res3[1] / 1000 + "\n");
+        new Thread(() -> {
+            for (int i = 10; i <= 200; i += 10) {
+                String file = "data/cities" + i + ".csv";
+                for (int j = 0; j < nbTests; j++) {
+                    double percent = (double) (i - 10) / 2. + (double) (j * 5) / nbTests;
+                    System.out.println("Pourcentage d'avancement AG : " + percent + "%");
+                    double[] res1;
+                    res1 = testAG(file);
+                    writeToFile("data/ag.csv", i + ";" + res1[0] + ";" + res1[1] / 1000 + "\n");
+                }
             }
-        }
-    }
+        }).start();
+        new Thread(() -> {
+            for (int i = 10; i <= 200; i += 10) {
+                String file = "data/cities" + i + ".csv";
+                for (int j = 0; j < nbTests; j++) {
+                    double percent = (double) (i - 10) / 2. + (double) (j * 5) / nbTests;
+                    System.out.println("Pourcentage d'avancement RS : " + percent + "%");
+                    double[] res;
+                    res = testAG(file);
+                    writeToFile("data/rs.csv", i + ";" + res[0] + ";" + res[1] / 1000 + "\n");
+                }
+            }
+        }).start();
+        new Thread(() -> {
+            for (int i = 10; i <= 100; i += 10) {
+                String file = "data/cities" + i + ".csv";
+                for (int j = 0; j < nbTests; j++) {
+                    double percent = (double) (i - 10) + (double) (j * 10) / nbTests;
+                    System.out.println("Pourcentage d'avancement Tabu1 : " + percent + "%");
+                    double[] res;
+                    res = testTabu(file);
+                    writeToFile("data/tabu1.csv", i + ";" + res[0] + ";" + res[1] / 1000 + "\n");
+                }
+            }
+        }).start();
 
+        new Thread(() -> {
+            for (int i = 110; i <= 150; i += 10) {
+                String file = "data/cities" + i + ".csv";
+                for (int j = 0; j < nbTests; j++) {
+                    double percent = (double) (i - 110) / 0.5 + (double) (j * 20) / nbTests;
+                    System.out.println("Pourcentage d'avancement Tabu2 : " + percent + "%");
+                    double[] res;
+                    res = testTabu(file);
+                    writeToFile("data/tabu2.csv", i + ";" + res[0] + ";" + res[1] / 1000 + "\n");
+                }
+            }
+        }).start();
+
+        new Thread(() -> {
+            for (int i = 160; i <= 200; i += 10) {
+                String file = "data/cities" + i + ".csv";
+                for (int j = 0; j < nbTests; j++) {
+                    double percent = (double) (i - 160) / 0.5 + (double) (j * 20) / nbTests;
+                    System.out.println("Pourcentage d'avancement Tabu3 : " + percent + "%");
+                    double[] res;
+                    res = testTabu(file);
+                    writeToFile("data/tabu2.csv", i + ";" + res[0] + ";" + res[1] / 1000 + "\n");
+                }
+            }
+        }).start();
+
+    }
 
 }
