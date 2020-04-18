@@ -5,6 +5,6 @@ public interface Algo {
 
     public double getBestDistance();
 
-    public double run();
+    public double run(boolean... b);
 
     }
