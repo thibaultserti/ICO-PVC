@@ -4,6 +4,7 @@
 # Edit at https://www.gitignore.io/?templates=code,java,intellij
 
 ### Code ###
+.vscode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
