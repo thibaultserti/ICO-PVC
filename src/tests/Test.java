@@ -104,7 +104,7 @@ public class Test {
                     System.out.println("Pourcentage d'avancement AG : " + percent + "%");
                     double[] res1;
                     res1 = testAG(file);
-                    writeToFile("data/ag.csv", i + ";" + res1[0] + ";" + res1[1] / 1000 + "\n");
+                    writeToFile("data/ag.csv", i + ";" + res1[0] + ";" + res1[1] / 1000000 + "\n");
                 }
             }
         }).start();
@@ -115,8 +115,8 @@ public class Test {
                     double percent = (double) (i - 10) / 2. + (double) (j * 5) / nbTests;
                     System.out.println("Pourcentage d'avancement RS : " + percent + "%");
                     double[] res;
-                    res = testAG(file);
-                    writeToFile("data/rs.csv", i + ";" + res[0] + ";" + res[1] / 1000 + "\n");
+                    res = testRS(file);
+                    writeToFile("data/rs.csv", i + ";" + res[0] + ";" + res[1] / 1000000 + "\n");
                 }
             }
         }).start();
@@ -128,7 +128,7 @@ public class Test {
                     System.out.println("Pourcentage d'avancement Tabu1 : " + percent + "%");
                     double[] res;
                     res = testTabu(file);
-                    writeToFile("data/tabu1.csv", i + ";" + res[0] + ";" + res[1] / 1000 + "\n");
+                    writeToFile("data/tabu.csv", i + ";" + res[0] + ";" + res[1] / 1000000 + "\n");
                 }
             }
         }).start();
@@ -141,7 +141,7 @@ public class Test {
                     System.out.println("Pourcentage d'avancement Tabu2 : " + percent + "%");
                     double[] res;
                     res = testTabu(file);
-                    writeToFile("data/tabu2.csv", i + ";" + res[0] + ";" + res[1] / 1000 + "\n");
+                    writeToFile("data/tabu.csv", i + ";" + res[0] + ";" + res[1] / 1000 + "\n");
                 }
             }
         }).start();
@@ -154,7 +154,7 @@ public class Test {
                     System.out.println("Pourcentage d'avancement Tabu3 : " + percent + "%");
                     double[] res;
                     res = testTabu(file);
-                    writeToFile("data/tabu2.csv", i + ";" + res[0] + ";" + res[1] / 1000 + "\n");
+                    writeToFile("data/tabu.csv", i + ";" + res[0] + ";" + res[1] / 1000 + "\n");
                 }
             }
         }).start();
