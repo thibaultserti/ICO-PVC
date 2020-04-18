@@ -87,7 +87,7 @@ public class Test {
 
     public void run(int nbTests) {
         try {
-            Process proc = Runtime.getRuntime().exec("rm -f data/ag.csv data/rs.csv dgit stabu.csv");
+            Process proc = Runtime.getRuntime().exec("rm -f data/ag.csv data/rs.csv data/tabu.csv");
             BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream()));
             String s = null;
             while ((s = stdInput.readLine()) != null) {
@@ -141,7 +141,7 @@ public class Test {
                     System.out.println("Pourcentage d'avancement Tabu2 : " + percent + "%");
                     double[] res;
                     res = testTabu(file);
-                    writeToFile("data/tabu.csv", i + ";" + res[0] + ";" + res[1] / 1000 + "\n");
+                    writeToFile("data/tabu.csv", i + ";" + res[0] + ";" + res[1] / 1000000 + "\n");
                 }
             }
         }).start();
@@ -154,7 +154,7 @@ public class Test {
                     System.out.println("Pourcentage d'avancement Tabu3 : " + percent + "%");
                     double[] res;
                     res = testTabu(file);
-                    writeToFile("data/tabu.csv", i + ";" + res[0] + ";" + res[1] / 1000 + "\n");
+                    writeToFile("data/tabu.csv", i + ";" + res[0] + ";" + res[1] / 1000000 + "\n");
                 }
             }
         }).start();
