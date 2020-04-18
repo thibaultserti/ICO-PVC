@@ -1,6 +1,6 @@
 **ICO - Problème du voyageur de commerce**
 
-Le but est de programmer les 3 algorithmes Tabou, Recuit Simulé et Génétique et de les faire coopérer au moyen d'agent.
+Le but est de programmer les 3 algorithmes Tabou, Recuit Simulé et Génétique et de les faire coopérer au moyen d'agents.
 
 __Utilisation :__
 
@@ -28,10 +28,14 @@ L'option `--size` ou `-s` permet de spécifier le nombre de villes à utiliser (
 __Pour compiler et exécuter :__
 
 _Linux :_
+
+Dans un premier temps il faut installer `jq` car il est utilisé dans le script de récupération de villes.
+Sous Debian, Ubuntu ou un dévrivé : `apt install jq`.
 Depuis un terminal, placez-vous dans le dossier principal du projet (où le fichier `Makefile` est présent) et lancez `make build` pour compiler, puis `make run` pour exécuter en ligne de commande et `make run-gui` pour exécuter avec l'interface graphique.
 
 
 _Windows :_
+
 Depuis un terminal, placez-vous dans le dossier principal du projet et lancez : `javac -classpath "lib/*.jar":"src/*.java" -d bin src/*.java src/algos/*.java src/gui/*.java`
 Ensuite lancez `java -classpath bin Main` pour exécuter le programme en ligne de commande et `java -classpath bin Main --gui` pour exécuter avec une interface graphique.
 
