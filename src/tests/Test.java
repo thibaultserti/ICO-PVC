@@ -96,15 +96,20 @@ public class Test {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+        writeToFile("data/ag.csv", "taillePVC;nbIterationAlgo;distanceOpt;tpsEnMs");
+        writeToFile("data/rs.csv", "taillePVC;nbIterationAlgo;distanceOpt;tpsEnMs");
+        writeToFile("data/tabu.csv", "taillePVC;nbIterationAlgo;distanceOpt;tpsMs");
+
         new Thread(() -> {
             for (int i = 10; i <= 200; i += 10) {
                 String file = "data/cities" + i + ".csv";
                 for (int j = 0; j < nbTests; j++) {
                     double percent = (double) (i - 10) / 2. + (double) (j * 5) / nbTests;
                     System.out.println("Pourcentage d'avancement AG : " + percent + "%");
-                    double[] res1;
-                    res1 = testAG(file);
-                    writeToFile("data/ag.csv", i + ";" + res1[0] + ";" + res1[1] / 1000000 + "\n");
+                    double[] res;
+                    res = testAG(file);
+                    writeToFile("data/ag.csv",
+                            i + ";" + numberOfIterationsAG + ";" + res[0] + ";" + res[1] / 1000000 + "\n");
                 }
             }
         }).start();
@@ -116,7 +121,8 @@ public class Test {
                     System.out.println("Pourcentage d'avancement RS : " + percent + "%");
                     double[] res;
                     res = testRS(file);
-                    writeToFile("data/rs.csv", i + ";" + res[0] + ";" + res[1] / 1000000 + "\n");
+                    writeToFile("data/rs.csv",
+                            i + ";" + numberOfIterationsRS + ";" + res[0] + ";" + res[1] / 1000000 + "\n");
                 }
             }
         }).start();
@@ -128,7 +134,8 @@ public class Test {
                     System.out.println("Pourcentage d'avancement Tabu1 : " + percent + "%");
                     double[] res;
                     res = testTabu(file);
-                    writeToFile("data/tabu.csv", i + ";" + res[0] + ";" + res[1] / 1000000 + "\n");
+                    writeToFile("data/tabu.csv",
+                            i + ";" + numberOfIterationsTabu + ";" + res[0] + ";" + res[1] / 1000000 + "\n");
                 }
             }
         }).start();
@@ -141,7 +148,8 @@ public class Test {
                     System.out.println("Pourcentage d'avancement Tabu2 : " + percent + "%");
                     double[] res;
                     res = testTabu(file);
-                    writeToFile("data/tabu.csv", i + ";" + res[0] + ";" + res[1] / 1000000 + "\n");
+                    writeToFile("data/tabu.csv",
+                            i + ";" + numberOfIterationsTabu + ";" + res[0] + ";" + res[1] / 1000000 + "\n");
                 }
             }
         }).start();
@@ -154,7 +162,8 @@ public class Test {
                     System.out.println("Pourcentage d'avancement Tabu3 : " + percent + "%");
                     double[] res;
                     res = testTabu(file);
-                    writeToFile("data/tabu.csv", i + ";" + res[0] + ";" + res[1] / 1000000 + "\n");
+                    writeToFile("data/tabu.csv",
+                            i + ";" + numberOfIterationsTabu + ";" + res[0] + ";" + res[1] / 1000000 + "\n");
                 }
             }
         }).start();
