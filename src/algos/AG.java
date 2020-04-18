@@ -9,7 +9,7 @@ import java.util.Collections;
 import static java.lang.Integer.max;
 import static java.lang.Integer.min;
 
-public class AG implements Algo{
+public class AG implements Algo {
     private ArrayList<Route> routes = new ArrayList<Route>();
     private Route route;
     private double mutationRate;
@@ -91,7 +91,7 @@ public class AG implements Algo{
         for (int i = 0; i < arenaSize; i++) {
             arena.add(routes.get((int) (Math.random() * populationSize)));
         }
-        //On sélectionne la meilleure
+        // On sélectionne la meilleure
         return getBestRoute(arena);
 
     }
@@ -125,19 +125,22 @@ public class AG implements Algo{
 
     }
 
-    public double run() {
-        // on va garder la meilleure route entre chaque itération pour être sûr de ne pas la perdre
+    public double run(boolean... b) {
+        // on va garder la meilleure route entre chaque itération pour être sûr de ne
+        // pas la perdre
         bestSolution = getBestRoute(routes);
         bestDistance = bestSolution.getTotalDistance();
         for (int i = 0; i < numberOfIterations; i++) {
             routes = evolve(routes);
             bestSolution = getBestRoute(routes);
             bestDistance = bestSolution.getTotalDistance();
-            if (i % 10 == 0) {
-                System.out.println(Colors.ANSI_BLUE + "Iteration #" + i + Colors.ANSI_RESET);
-                System.out.println(Colors.ANSI_CYAN + "Routes : " + Colors.ANSI_RESET + routes);
-                System.out.println(Colors.ANSI_CYAN + "Meilleure distance : " + Colors.ANSI_RESET + bestDistance);
-                System.out.println(Colors.ANSI_CYAN + "Meilleure solution : " + Colors.ANSI_RESET + bestSolution);
+            if ((b.length == 0)  || (b[0] == true)){
+                if (i % 10 == 0) {
+                    System.out.println(Colors.ANSI_BLUE + "Iteration #" + i + Colors.ANSI_RESET);
+                    System.out.println(Colors.ANSI_CYAN + "Routes : " + Colors.ANSI_RESET + routes);
+                    System.out.println(Colors.ANSI_CYAN + "Meilleure distance : " + Colors.ANSI_RESET + bestDistance);
+                    System.out.println(Colors.ANSI_CYAN + "Meilleure solution : " + Colors.ANSI_RESET + bestSolution);
+                }
             }
         }
         return bestDistance;

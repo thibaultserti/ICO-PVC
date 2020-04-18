@@ -62,31 +62,31 @@ public class Test {
     }
 
     private double[] testRS(String file) {
-        cities = loadFile(file);
+        cities = loadFile(file,false);
         Route route = new Route(cities);
         RS rs = new RS(route, startingTemperature, numberOfIterationsRS, coolingRate);
         long startTime = System.nanoTime();
-        double bestDistance = rs.run();
+        double bestDistance = rs.run(false);
         long stopTime = System.nanoTime();
         return new double[]{bestDistance, stopTime - startTime};
     }
 
     private double[] testAG(String file) {
-        cities = loadFile(file);
+        cities = loadFile(file,false);
         Route route = new Route(cities);
         AG ag = new AG(route, mutationRate, arenaSize, numberOfIterationsAG, populationSize);
         long startTime = System.nanoTime();
-        double bestDistance = ag.run();
+        double bestDistance = ag.run(false);
         long stopTime = System.nanoTime();
         return new double[]{bestDistance, stopTime - startTime};
     }
 
     private double[] testTabu(String file) {
-        cities = loadFile(file);
+        cities = loadFile(file,false);
         Route route = new Route(cities);
         Tabu tabu = new Tabu(route, numberOfIterationsTabu, tabuListMaxSize);
         long startTime = System.nanoTime();
-        double bestDistance = tabu.run();
+        double bestDistance = tabu.run(false);
         long stopTime = System.nanoTime();
         return new double[]{bestDistance, stopTime - startTime};
     }
@@ -94,7 +94,6 @@ public class Test {
     public void run(int nbTests) {
         try {
             Process proc = Runtime.getRuntime().exec("rm -f data/ag.csv data/rs.csv dgit stabu.csv");
-            System.out.println("toto");
             BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream()));
             String s = null;
             while ((s = stdInput.readLine()) != null) {
@@ -103,9 +102,11 @@ public class Test {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        for (int i = 10; i <= 10; i += 10) {
+        for (int i = 10; i <= 200; i += 10) {
             String file = "data/cities" + i + ".csv";
             for (int j = 0; j < nbTests; j++) {
+                double percent = (double) (i-10) / 2. + (double) (j*5)/nbTests;
+                System.out.println("Pourcentage d'avancement : " + percent + "%");
                 double[] res1;
                 double[] res2;
                 double[] res3;

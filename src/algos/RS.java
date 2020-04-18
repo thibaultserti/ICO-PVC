@@ -51,7 +51,7 @@ public class RS implements Algo {
         this.coolingRate = coolingRate;
     }
 
-    public double run() {
+    public double run(boolean... b) {
         double t = startingTemperature;
 
         Route currentSolution = route;
@@ -72,15 +72,16 @@ public class RS implements Algo {
                 }
                 t *= coolingRate;
             }
+            if ((b.length == 0) || (b[0] == true)) {
+                if (i % 100 == 0) {
+                    System.out.println(Colors.ANSI_BLUE + "Iteration #" + i + Colors.ANSI_RESET);
+                    System.out.println(Colors.ANSI_CYAN + "Température : " + Colors.ANSI_RESET + t);
+                    System.out.println(Colors.ANSI_CYAN + "Solution : " + Colors.ANSI_RESET + currentSolution);
+                    System.out.println(Colors.ANSI_CYAN + "Distance actuelle : " + Colors.ANSI_RESET + currentDistance);
+                    System.out.println(Colors.ANSI_CYAN + "Meilleure distance : " + Colors.ANSI_RESET + bestDistance);
+                    System.out.println(Colors.ANSI_CYAN + "Meilleure solution : " + Colors.ANSI_RESET + bestSolution);
 
-            if (i % 100 == 0) {
-                System.out.println(Colors.ANSI_BLUE + "Iteration #" + i + Colors.ANSI_RESET);
-                System.out.println(Colors.ANSI_CYAN + "Température : " + Colors.ANSI_RESET + t);
-                System.out.println(Colors.ANSI_CYAN + "Solution : " + Colors.ANSI_RESET + currentSolution);
-                System.out.println(Colors.ANSI_CYAN + "Distance actuelle : " + Colors.ANSI_RESET + currentDistance);
-                System.out.println(Colors.ANSI_CYAN + "Meilleure distance : " + Colors.ANSI_RESET + bestDistance);
-                System.out.println(Colors.ANSI_CYAN + "Meilleure solution : " + Colors.ANSI_RESET + bestSolution);
-
+                }
             }
         }
         return bestDistance;

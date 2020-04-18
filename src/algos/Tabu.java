@@ -6,7 +6,7 @@ import conf.Defaults;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Tabu implements Algo{
+public class Tabu implements Algo {
     private Route route;
     private final int numberOfIterations;
     private final int tabuListMaxSize;
@@ -50,7 +50,7 @@ public class Tabu implements Algo{
         return neighbors;
     }
 
-    public double run() {
+    public double run(boolean... b) {
         Route currentSolution = route;
         bestSolution = new Route(currentSolution.getCities());
 
@@ -78,14 +78,16 @@ public class Tabu implements Algo{
             if (tabuList.size() > tabuListMaxSize) {
                 tabuList.remove(0);
             }
+            if ((b.length == 0) || (b[0] == true)){
 
-            if (i % 100 == 0) {
-                System.out.println(Colors.ANSI_BLUE + "Iteration #" + i + Colors.ANSI_RESET);
-                System.out.println(Colors.ANSI_CYAN + "Solution : " + Colors.ANSI_RESET + currentSolution);
-                System.out.println(Colors.ANSI_CYAN + "Distance actuelle : " + Colors.ANSI_RESET + currentDistance);
-                System.out.println(Colors.ANSI_CYAN + "Meilleure distance : " + Colors.ANSI_RESET + bestDistance);
-                System.out.println(Colors.ANSI_CYAN + "Meilleure solution : " + Colors.ANSI_RESET + bestSolution);
+                if (i % 100 == 0) {
+                    System.out.println(Colors.ANSI_BLUE + "Iteration #" + i + Colors.ANSI_RESET);
+                    System.out.println(Colors.ANSI_CYAN + "Solution : " + Colors.ANSI_RESET + currentSolution);
+                    System.out.println(Colors.ANSI_CYAN + "Distance actuelle : " + Colors.ANSI_RESET + currentDistance);
+                    System.out.println(Colors.ANSI_CYAN + "Meilleure distance : " + Colors.ANSI_RESET + bestDistance);
+                    System.out.println(Colors.ANSI_CYAN + "Meilleure solution : " + Colors.ANSI_RESET + bestSolution);
 
+                }
             }
         }
         return bestDistance;
