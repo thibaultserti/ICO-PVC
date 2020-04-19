@@ -1,6 +1,5 @@
 # /usr/bin/env python3
 
-import PIL as pil
 import pandas as pd
 import numpy as np
 import six
