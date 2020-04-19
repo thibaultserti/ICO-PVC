@@ -96,9 +96,9 @@ public class Test {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        writeToFile("data/ag.csv", "taillePVC;nbIterationAlgo;distanceOpt;tpsEnMs");
-        writeToFile("data/rs.csv", "taillePVC;nbIterationAlgo;distanceOpt;tpsEnMs");
-        writeToFile("data/tabu.csv", "taillePVC;nbIterationAlgo;distanceOpt;tpsMs");
+        writeToFile("data/ag.csv", "taillePVC;nbIterationAlgo;distanceOpt;tpsMs\n");
+        writeToFile("data/rs.csv", "taillePVC;nbIterationAlgo;distanceOpt;tpsMs\n");
+        writeToFile("data/tabu.csv", "taillePVC;nbIterationAlgo;distanceOpt;tpsMs\n");
 
         new Thread(() -> {
             for (int i = 10; i <= 200; i += 10) {
