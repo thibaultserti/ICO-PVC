@@ -34,46 +34,62 @@ def render_mpl_table(data, name, col_width=3.0, row_height=0.625, font_size=14,
 
 
 def nbIteration_distanceOpt(df, filename):
-    fig = plt.plot(df["nbIterationAlgo"], df["distanceOpt"])
+    df.drop("taillePVC", axis=1)
+    df = df.groupby(["nbIterationAlgo"], as_index=False)[
+        ["moyenne", "tps"]].agg({'moyenne': ['mean'], 'tps': ['mean']})
+    df.columns = df.columns.droplevel(1)
+    fig = plt.plot(df["nbIterationAlgo"], df["moyenne"])
     plt.xlabel("Nombre d'itération de l'algorithme")
     plt.ylabel("Distance optimale moyenne trouvée")
     plt.title("Distance moyenne en fonction du nombre d'itérations choisi")
     plt.savefig(filename)
     plt.close()
 
+
 def nbIteration_tpsMs(df, filename):
-    fig = plt.plot(df["nbIterationAlgo"], df["tpsMs"])
+    df.drop("taillePVC", axis=1)
+    df = df.groupby(["nbIterationAlgo"], as_index=False)[
+        ["moyenne", "tps"]].agg({'moyenne': ['mean'], 'tps': ['mean']})
+    df.columns = df.columns.droplevel(1)
+    fig = plt.plot(df["nbIterationAlgo"], df["tps"])
     plt.xlabel("Nombre d'itération de l'algorithme")
     plt.ylabel("Temps d'exécution moyen de l'agorithme (ms)")
     plt.title("Temps d'exécution en fonction du nombre d'itérations choisi")
     plt.savefig(filename)
     plt.close()
 
+
 def taillePVC_distanceOpt(df, filename):
-    fig = plt.plot(df["taillePVC"], df["distanceOpt"])
+    df.drop("nbIterationAlgo", axis=1)
+    df = df.groupby(["taillePVC"], as_index=False)[["moyenne", "tps"]].agg(
+        {'moyenne': ['mean'], 'tps': ['mean']})
+    df.columns = df.columns.droplevel(1)
+    fig = plt.plot(df["taillePVC"], df["moyenne"])
     plt.xlabel("Nombre de villes")
-    plt.ylabel("Distance optimale moenne trouvée")
+    plt.ylabel("Distance optimale moyenne trouvée")
     plt.title("Distance moyenne optimale en fonction du nombre de villes")
     plt.savefig(filename)
     plt.close()
 
+
 def taillePVC_tpsMs(df, filename):
-    fig = plt.plot(df["taillePVC"], df["tpsMs"])
+    df.drop("nbIterationAlgo", axis=1)
+    df = df.groupby(["taillePVC"], as_index=False)[["moyenne", "tps"]].agg(
+        {'moyenne': ['mean'], 'tps': ['mean']})
+    df.columns = df.columns.droplevel(1)
+    fig = plt.plot(df["moyenne"], df["tps"])
     plt.xlabel("Nombre de villes")
     plt.ylabel("Temps d'exécution moyen de l'algorithme (ms)")
     plt.title("Temps d'exécution en fonction du nombre de villes")
     plt.savefig(filename)
     plt.close()
 
+
 def gen_table(df, n, filepath):
     df = df.where(df["nbIterationAlgo"] == n)
     df = df.drop("nbIterationAlgo", axis=1)
-    df["moyenne"] = df["distanceOpt"]["mean"]
-    df["ecart"] = ((df["distanceOpt"]["mean"] - df["distanceOpt"]
-                    ["min"]) / df["distanceOpt"]["mean"]) * 100
-    df["tps"] = df["tpsMs"]["mean"]
-    df = df.drop("distanceOpt", axis=1)
-    df = df.drop("tpsMs", axis=1)
+    df = df.groupby(["taillePVC"], as_index=False)[["moyenne", "tps"]].agg(
+        {'moyenne': ['mean'], 'tps': ['mean']})
     df.columns = df.columns.droplevel(1)
     df = df.rename(columns={"taillePVC": "Nombre de villes",
                             "moyenne": "Moyenne (km)", "ecart": "Écart (%)", "tps": "Durée (ms)"})
@@ -84,15 +100,47 @@ def gen_table(df, n, filepath):
 def transform(df):
     df = df.groupby(["taillePVC", "nbIterationAlgo"], as_index=False)[
         ["distanceOpt", "tpsMs"]].agg({'distanceOpt': ['mean', 'min'], 'tpsMs': ['mean']})
+    df["moyenne"] = df["distanceOpt"]["mean"]
+    df["ecart"] = ((df["distanceOpt"]["mean"] - df["distanceOpt"]
+                    ["min"]) / df["distanceOpt"]["mean"]) * 100
+    df["tps"] = df["tpsMs"]["mean"]
+    df = df.drop("distanceOpt", axis=1)
+    df = df.drop("tpsMs", axis=1)
+    df.columns = df.columns.droplevel(1)
+
     return df
 
-for filename in ["ag", "rs", "tabu"]:
-    df = pd.read_csv("data/" + filename + ".csv", sep=";")
-    df = transform(df)
-    for nb_iteration in range(100,1001,100):
-        gen_table(df, nb_iteration, "python/results/" + filename + "_" + str(nb_iteration) + ".png")
-    taillePVC_distanceOpt(df, "python/results/" + filename + "_1.png")
-    taillePVC_tpsMs(df, "python/results/" + filename + "_2.png")
-    nbIteration_distanceOpt(df, "python/results/" + filename + "_3.png")
-    nbIteration_tpsMs(df, "python/results/" + filename + "_4.png")
 
+filename = "rs"
+df = pd.read_csv("data/" + filename + ".csv", sep=";")
+df = transform(df)
+for nb_iteration in range(100, 2001, 100):
+    gen_table(df, nb_iteration, "python/results/" +
+              filename + "_" + str(nb_iteration) + ".png")
+taillePVC_distanceOpt(df, "python/results/" + filename + "_1.png")
+taillePVC_tpsMs(df, "python/results/" + filename + "_2.png")
+nbIteration_distanceOpt(df, "python/results/" + filename + "_3.png")
+nbIteration_tpsMs(df, "python/results/" + filename + "_4.png")
+
+
+filename = "ag"
+df = pd.read_csv("data/" + filename + ".csv", sep=";")
+df = transform(df)
+for nb_iteration in range(100, 1001, 100):
+    gen_table(df, nb_iteration, "python/results/" +
+              filename + "_" + str(nb_iteration) + ".png")
+taillePVC_distanceOpt(df, "python/results/" + filename + "_1.png")
+taillePVC_tpsMs(df, "python/results/" + filename + "_2.png")
+nbIteration_distanceOpt(df, "python/results/" + filename + "_3.png")
+nbIteration_tpsMs(df, "python/results/" + filename + "_4.png")
+
+filename = "rs"
+df = pd.read_csv("data/" + filename + ".csv", sep=";")
+df = transform(df)
+for nb_iteration in range(100, 301, 100):
+    gen_table(df, nb_iteration, "python/results/" +
+              filename + "_" + str(nb_iteration) + ".png")
+taillePVC_distanceOpt(df, "python/results/" + filename + "_1.png")
+taillePVC_tpsMs(df, "python/results/" + filename + "_2.png")
+nbIteration_distanceOpt(df, "python/results/" + filename + "_3.png")
+nbIteration_tpsMs(df, "python/results/" + filename + "_4.png")

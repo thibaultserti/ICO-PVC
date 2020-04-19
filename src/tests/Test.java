@@ -15,17 +15,22 @@ import static conf.Settings.writeToFile;
 public class Test {
     private static ArrayList<City> cities = new ArrayList<>();
 
-    private final double startingTemperature;
-    private final int numberOfIterationsRS;
-    private final double coolingRate;
+    private double startingTemperature;
+    private int numberOfIterationsRS;
+    private double coolingRate;
 
-    private final double mutationRate;
-    private final int arenaSize;
-    private final int populationSize;
-    private final int numberOfIterationsAG;
+    private double mutationRate;
+    private int arenaSize;
+    private int populationSize;
+    private int numberOfIterationsAG;
 
-    private final int numberOfIterationsTabu;
-    private final int tabuListMaxSize;
+    private int numberOfIterationsTabu;
+    private int tabuListMaxSize;
+
+    private final static int nbIterMaxRS = 10000;
+    private final static int nbIterMaxAG = 1000;
+    private final static int nbIterMaxTabu = 300;
+
 
     public Test() {
         startingTemperature = Defaults.startingTemperature;
@@ -103,70 +108,65 @@ public class Test {
         new Thread(() -> {
             for (int i = 10; i <= 200; i += 10) {
                 String file = "data/cities" + i + ".csv";
-                for (int j = 0; j < nbTests; j++) {
-                    double percent = (double) (i - 10) / 2. + (double) (j * 5) / nbTests;
-                    System.out.println("Pourcentage d'avancement AG : " + percent + "%");
-                    double[] res;
-                    res = testAG(file);
-                    writeToFile("data/ag.csv",
-                            i + ";" + numberOfIterationsAG + ";" + res[0] + ";" + res[1] / 1000000 + "\n");
+                for (numberOfIterationsAG = Defaults.numberOfIterationsAG; numberOfIterationsAG < nbIterMaxAG; numberOfIterationsAG += 100) {
+                    for (int j = 0; j < nbTests; j++) {
+                        System.out.println("Pourcentage d'avancement AG : " + i + "/200 " + numberOfIterationsAG + "/"
+                                + nbIterMaxAG + " " + j + "/" + nbTests);
+                        double[] res;
+                        res = testAG(file);
+                        writeToFile("data/ag.csv",
+                                i + ";" + numberOfIterationsAG + ";" + res[0] + ";" + res[1] / 1000000 + "\n");
+                    }
                 }
             }
         }).start();
         new Thread(() -> {
             for (int i = 10; i <= 200; i += 10) {
                 String file = "data/cities" + i + ".csv";
-                for (int j = 0; j < nbTests; j++) {
-                    double percent = (double) (i - 10) / 2. + (double) (j * 5) / nbTests;
-                    System.out.println("Pourcentage d'avancement RS : " + percent + "%");
-                    double[] res;
-                    res = testRS(file);
-                    writeToFile("data/rs.csv",
-                            i + ";" + numberOfIterationsRS + ";" + res[0] + ";" + res[1] / 1000000 + "\n");
+                for (numberOfIterationsRS = Defaults.numberOfIterationsRS; numberOfIterationsRS < nbIterMaxRS; numberOfIterationsRS += 100) {
+                    for (int j = 0; j < nbTests; j++) {
+                        System.out.println("Pourcentage d'avancement RS : " + i + "/200 " + numberOfIterationsRS + "/"
+                                + nbIterMaxRS + " " + j + "/" + nbTests);
+                        double[] res;
+                        res = testRS(file);
+                        writeToFile("data/rs.csv",
+                                i + ";" + numberOfIterationsRS + ";" + res[0] + ";" + res[1] / 1000000 + "\n");
+                    }
                 }
             }
         }).start();
         new Thread(() -> {
-            for (int i = 10; i <= 100; i += 10) {
+            for (int i = 10; i <= 200; i += 10) {
                 String file = "data/cities" + i + ".csv";
-                for (int j = 0; j < nbTests; j++) {
-                    double percent = (double) (i - 10) + (double) (j * 10) / nbTests;
-                    System.out.println("Pourcentage d'avancement Tabu1 : " + percent + "%");
-                    double[] res;
-                    res = testTabu(file);
-                    writeToFile("data/tabu.csv",
-                            i + ";" + numberOfIterationsTabu + ";" + res[0] + ";" + res[1] / 1000000 + "\n");
+                for (numberOfIterationsTabu = Defaults.numberOfIterationsTabu; numberOfIterationsTabu < nbIterMaxTabu; numberOfIterationsTabu += 100) {
+                    for (int j = 0; j < nbTests; j++) {
+                        System.out.println("Pourcentage d'avancement Tabu : " + i + "/200 " + numberOfIterationsTabu
+                                + "/" + nbIterMaxTabu + " " + j + "/" + nbTests);
+                        double[] res;
+                        res = testTabu(file);
+                        writeToFile("data/tabu.csv",
+                                i + ";" + numberOfIterationsTabu + ";" + res[0] + ";" + res[1] / 1000000 + "\n");
+                    }
                 }
             }
         }).start();
-
-        new Thread(() -> {
-            for (int i = 110; i <= 150; i += 10) {
-                String file = "data/cities" + i + ".csv";
-                for (int j = 0; j < nbTests; j++) {
-                    double percent = (double) (i - 110) / 0.5 + (double) (j * 20) / nbTests;
-                    System.out.println("Pourcentage d'avancement Tabu2 : " + percent + "%");
-                    double[] res;
-                    res = testTabu(file);
-                    writeToFile("data/tabu.csv",
-                            i + ";" + numberOfIterationsTabu + ";" + res[0] + ";" + res[1] / 1000000 + "\n");
-                }
-            }
-        }).start();
-
-        new Thread(() -> {
-            for (int i = 160; i <= 200; i += 10) {
-                String file = "data/cities" + i + ".csv";
-                for (int j = 0; j < nbTests; j++) {
-                    double percent = (double) (i - 160) / 0.5 + (double) (j * 20) / nbTests;
-                    System.out.println("Pourcentage d'avancement Tabu3 : " + percent + "%");
-                    double[] res;
-                    res = testTabu(file);
-                    writeToFile("data/tabu.csv",
-                            i + ";" + numberOfIterationsTabu + ";" + res[0] + ";" + res[1] / 1000000 + "\n");
-                }
-            }
-        }).start();
+        /*
+         * new Thread(() -> { for (int i = 110; i <= 150; i += 10) { String file =
+         * "data/cities" + i + ".csv"; for (int j = 0; j < nbTests; j++) { double
+         * percent = (double) (i - 110) / 0.5 + (double) (j * 20) / nbTests;
+         * System.out.println("Pourcentage d'avancement Tabu2 : " + percent + "%");
+         * double[] res; res = testTabu(file); writeToFile("data/tabu.csv", i + ";" +
+         * numberOfIterationsTabu + ";" + res[0] + ";" + res[1] / 1000000 + "\n"); } }
+         * }).start();
+         * 
+         * new Thread(() -> { for (int i = 160; i <= 200; i += 10) { String file =
+         * "data/cities" + i + ".csv"; for (int j = 0; j < nbTests; j++) { double
+         * percent = (double) (i - 160) / 0.5 + (double) (j * 20) / nbTests;
+         * System.out.println("Pourcentage d'avancement Tabu3 : " + percent + "%");
+         * double[] res; res = testTabu(file); writeToFile("data/tabu.csv", i + ";" +
+         * numberOfIterationsTabu + ";" + res[0] + ";" + res[1] / 1000000 + "\n"); } }
+         * }).start();
+         */
 
     }
 
