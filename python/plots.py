@@ -73,6 +73,7 @@ def gen_table(df, n, filepath):
     df = df.drop("tpsEnMs", axis=1)
     df.columns = df.columns.droplevel(1)
     df = df.rename(columns={"taillePVC": "Nombre de villes", "moyenne": "Moyenne", "ecart": "Écart", "tps": "Durée"})
+    df  = df.applymap(lambda x : '{0:.2f}'.format(x))
     render_mpl_table(df, filepath)
 
 def transform(df):
