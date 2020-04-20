@@ -10,6 +10,15 @@ Il y a deux modes pour lancer le programme : en ligne de commande ou avec l'inte
 Pour lancer le programme en mode graphique, il faut utiliser l'option `--gui`
 Pour le lancer en mode ligne de commande, aucune option n'est nécessaire.
 
+### Villes :
+
+La récupération des villes se fait avec `cities.sh`. 
+Une fois exécuté, les villes sont enregistrées dans le fichier `cities.csv`.
+Il est lui-même utilisé pour créer les objets Java par la classe Main.
+
+Pour essayer avec d'autres villes, il suffit de mettre à jour le tableau des villes dans `cities.sh` et d'exécuter le programme avec la commande `bash cities.sh`.
+L'option `--size` ou `-s` permet de spécifier le nombre de villes à utiliser (les multiples de 10 jusqu'à 200).
+
 ### Tests :
 
 Pour créer un fichier de benchmark, il faut lancer le programme avec l'option `--benchmark n`, n étant le nombre 
@@ -21,23 +30,21 @@ qu'il suffit d'exécuter avec `python3 python/plots.py`
 
 **Attention :** le temps d'exécution est déjà assez long pour n=1, cela prend déjà 5 minutes. (à cause de Tabu)
 
-### Villes :
+### Dataset :
 
-La récupération des villes se fait avec `cities.sh`. 
-Une fois exécuté, les villes sont enregistrées dans le fichier `cities.csv`.
-Il est lui-même utilisé pour créer les objets Java par la classe Main.
-
-Pour essayer avec d'autres villes, il suffit de mettre à jour le tableau des villes dans `cities.sh` et d'exécuter le programme avec la commande `bash cities.sh`.
-L'option `--size` ou `-s` permet de spécifier le nombre de villes à utiliser (les multiples de 10 jusqu'à 200).
+Pour créer le dataset, il faut lancer le programme avec l'option `--dataset n`, n étant le nombre d'entrée 
+voulu pour chaque algorithme dans le dataset (finalement le nombre de ligne du dataset sera donc de 3*n) 
 
 ## Pour compiler et exécuter :
 
 ### Linux :
 
 Dans un premier temps il faut installer `jq` car il est utilisé dans le script de récupération de villes.
-Sous Debian, Ubuntu ou un dévrivé : `apt install jq`.
+Sous Debian, Ubuntu ou un dérivé : `apt install jq`.
 Depuis un terminal, placez-vous dans le dossier principal du projet (où le fichier `Makefile` est présent) et lancez `make build` pour compiler, puis `make run` pour exécuter en ligne de commande et `make run-gui` pour exécuter avec l'interface graphique.
-Pour lancer les tests lancer `make run-tests`.
+Pour lancer les tests lancer : `make run-tests`.
+Pour créer le dataset : `make dataset`.
+Pour supprimer tous les csv et png générés : `make clean`
 
 ### Windows :
 
