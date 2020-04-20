@@ -47,8 +47,8 @@ public class Test {
     }
 
     public Test(double startingTemperature, int numberOfIterationsRS, double coolingRate, double mutationRate,
-            int arenaSize, int populationSize, int numberOfIterationsAG, int numberOfIterationsTabu,
-            int tabuListMaxSize) {
+                int arenaSize, int populationSize, int numberOfIterationsAG, int numberOfIterationsTabu,
+                int tabuListMaxSize) {
         this.startingTemperature = startingTemperature;
         this.numberOfIterationsRS = numberOfIterationsRS;
         this.coolingRate = coolingRate;
@@ -67,7 +67,7 @@ public class Test {
         long startTime = System.nanoTime();
         double bestDistance = rs.run(false);
         long stopTime = System.nanoTime();
-        return new double[] { bestDistance, stopTime - startTime };
+        return new double[]{bestDistance, stopTime - startTime};
     }
 
     private double[] testAG(String file) {
@@ -77,7 +77,7 @@ public class Test {
         long startTime = System.nanoTime();
         double bestDistance = ag.run(false);
         long stopTime = System.nanoTime();
-        return new double[] { bestDistance, stopTime - startTime };
+        return new double[]{bestDistance, stopTime - startTime};
     }
 
     private double[] testTabu(String file) {
@@ -87,8 +87,62 @@ public class Test {
         long startTime = System.nanoTime();
         double bestDistance = tabu.run(false);
         long stopTime = System.nanoTime();
-        return new double[] { bestDistance, stopTime - startTime };
+        return new double[]{bestDistance, stopTime - startTime};
     }
+
+    public void createDataset(int tailleDataset) {
+        writeToFile("data/dataset.csv", "algo;taillePVC;nbIterationAlgo;param1;param2;param3;distanceOpt;tpsMs\n");
+        writeToFile("data/dataset.csv", "algo;taillePVC;nbIterationAlgo;param1;param2;param3;distanceOpt;tpsMs\n");
+        writeToFile("data/dataset.csv", "algo;taillePVC;nbIterationAlgo;param1;param2;param3;distanceOpt;tpsMs\n");
+
+        new Thread(() -> {
+            for (int i = 0; i < tailleDataset; i++) {
+                numberOfIterationsAG = (int) (100 + Math.random() * 901);
+                populationSize = (int) (2 + Math.random() * 19);
+                arenaSize = (int) (2 + Math.random() * 14);
+                mutationRate = Math.random() * 0.1;
+                int nbCities = (int) (1 + Math.random() * 10) * 10;
+                String file = "data/cities" + nbCities + ".csv";
+                System.out.println("Pourcentage d'avancement AG : " + ((double) i / (double) tailleDataset) * 100 + "%");
+                double[] res;
+                res = testAG(file);
+                String s = "ag;" + nbCities + ";" + numberOfIterationsAG + ";" + populationSize + ";" + arenaSize + ";"
+                        + mutationRate + ";" + res[0] + ";" + res[1] / 1000000 + "\n";
+                writeToFile("data/dataset.csv", s);
+            }
+        }).start();
+
+        new Thread(() -> {
+            for (int i = 0; i < tailleDataset; i++) {
+                numberOfIterationsRS = (int) (100 + Math.random() * 9901);
+                startingTemperature = (int) (10 + Math.random() * 901);
+                coolingRate = 0.98 + (Math.random() * 0.02);
+                int nbCities = (int) (1 + Math.random() * 10) * 10;
+                String file = "data/cities" + nbCities + ".csv";
+                System.out.println("Pourcentage d'avancement RS : " + ((double) i / (double) tailleDataset) * 100 + "%");
+                double[] res;
+                res = testAG(file);
+                String s = "rs;" + nbCities + ";" + numberOfIterationsAG + ";" + startingTemperature + ";" + coolingRate + ";"
+                        + "NaN" + ";" + res[0] + ";" + res[1] / 1000000 + "\n";
+                writeToFile("data/dataset.csv", s);
+            }
+        }).start();
+        new Thread(() -> {
+            for (int i = 0; i < tailleDataset; i++) {
+                numberOfIterationsTabu = (int) (100 + Math.random() * 101);
+                tabuListMaxSize = (int) (1 + Math.random() * 9);
+                int nbCities = (int) (1 + Math.random() * 10) * 10;
+                String file = "data/cities" + nbCities + ".csv";
+                System.out.println("Pourcentage d'avancement Tabu : " + ((double) i / (double) tailleDataset) * 100 + "%");
+                double[] res;
+                res = testAG(file);
+                String s = "tabu;" + nbCities + ";" + numberOfIterationsAG + ";" + tabuListMaxSize + ";" + "NaN" + ";"
+                        + "NaN" + ";" + res[0] + ";" + res[1] / 1000000 + "\n";
+                writeToFile("data/dataset.csv", s);
+            }
+        }).start();
+    }
+
 
     public void run(int nbTests) {
         try {
@@ -151,24 +205,6 @@ public class Test {
                 }
             }
         }).start();
-        /*
-         * new Thread(() -> { for (int i = 110; i <= 150; i += 10) { String file =
-         * "data/cities" + i + ".csv"; for (int j = 0; j < nbTests; j++) { double
-         * percent = (double) (i - 110) / 0.5 + (double) (j * 20) / nbTests;
-         * System.out.println("Pourcentage d'avancement Tabu2 : " + percent + "%");
-         * double[] res; res = testTabu(file); writeToFile("data/tabu.csv", i + ";" +
-         * numberOfIterationsTabu + ";" + res[0] + ";" + res[1] / 1000000 + "\n"); } }
-         * }).start();
-         * 
-         * new Thread(() -> { for (int i = 160; i <= 200; i += 10) { String file =
-         * "data/cities" + i + ".csv"; for (int j = 0; j < nbTests; j++) { double
-         * percent = (double) (i - 160) / 0.5 + (double) (j * 20) / nbTests;
-         * System.out.println("Pourcentage d'avancement Tabu3 : " + percent + "%");
-         * double[] res; res = testTabu(file); writeToFile("data/tabu.csv", i + ";" +
-         * numberOfIterationsTabu + ";" + res[0] + ";" + res[1] / 1000000 + "\n"); } }
-         * }).start();
-         */
-
     }
 
 }

@@ -40,7 +40,7 @@ public class Settings {
         } catch (
 
         FileNotFoundException e) {
-            System.out.println("Error File Not Found !");
+            System.out.println("Error File" + path + " Not Found !");
         } catch (IOException e) {
             e.printStackTrace();
         }
