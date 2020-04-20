@@ -3,8 +3,7 @@ import gui.GUI;
 import tests.Test;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 import static conf.Settings.loadFile;
 
@@ -39,17 +38,41 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        if ((args.length != 0) && Arrays.asList(args).contains("--gui")) {
+        final Map<String, List<String>> params = new HashMap<>();
+        List<String> options = null;
+        for (int i = 0; i < args.length; i++) {
+            final String a = args[i];
+
+            if (a.charAt(0) == '-') {
+                if (a.length() < 2) {
+                    System.err.println("Error at argument " + a);
+                    return;
+                }
+
+                options = new ArrayList<>();
+                params.put(a.substring(1), options);
+            }
+            else if (options != null) {
+                options.add(a);
+            }
+            else {
+                System.err.println("Illegal parameter usage");
+                return;
+            }
+        }
+
+        if (params.containsKey("-gui")) {
             JFrame GUI = new GUI();
-        } else if ((args.length != 0) && Arrays.asList(args).contains("--benchmark")){
+        } else if (params.containsKey("-benchmark")){
+            int n = Integer.parseInt(params.get("-benchmark").get(0));
             Test test = new Test();
-            test.run(10);
+            test.run(n);
         }
         else {
             cities = loadFile("data/cities.csv");
-            //testAG();
-            //testRS();
-            //*testTabu();
+            testAG();
+            testRS();
+            testTabu();
         }
     }
 
