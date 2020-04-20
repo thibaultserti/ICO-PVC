@@ -19,7 +19,7 @@ le nombre de villes, la distance optimale trouvée et le temps d'exécution.
 Ensuite, il est possible de générer des courbes et des tableaux récapitulatifs avec le script python,
 qu'il suffit d'exécuter avec `python3 python/plots.py`
 
-**Attention :** le temps d'exécution est déjà assez long pour n=1, cela prend déjà 10 minutes. (à cause de Tabu)
+**Attention :** le temps d'exécution est déjà assez long pour n=1, cela prend déjà 5 minutes. (à cause de Tabu)
 
 ### Villes :
 

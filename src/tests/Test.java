@@ -29,7 +29,7 @@ public class Test {
 
     private final static int nbIterMaxRS = 10000;
     private final static int nbIterMaxAG = 1000;
-    private final static int nbIterMaxTabu = 150;
+    private final static int nbIterMaxTabu = 200;
 
 
     public Test() {
@@ -137,11 +137,11 @@ public class Test {
             }
         }).start();
         new Thread(() -> {
-            for (int i = 10; i <= 200; i += 10) {
+            for (int i = 10; i <= 100; i += 10) {
                 String file = "data/cities" + i + ".csv";
                 for (numberOfIterationsTabu = Defaults.numberOfIterationsTabu; numberOfIterationsTabu <= nbIterMaxTabu; numberOfIterationsTabu += 10) {
                     for (int j = 0; j < nbTests; j++) {
-                        System.out.println("Pourcentage d'avancement Tabu : " + i + "/200 " + numberOfIterationsTabu
+                        System.out.println("Pourcentage d'avancement Tabu : " + i + "/100 " + numberOfIterationsTabu
                                 + "/" + nbIterMaxTabu + " " + j + "/" + nbTests);
                         double[] res;
                         res = testTabu(file);

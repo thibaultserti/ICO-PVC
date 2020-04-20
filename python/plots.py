@@ -77,7 +77,7 @@ def taillePVC_tpsMs(df, filename):
     df = df.groupby(["taillePVC"], as_index=False)[["moyenne", "tps"]].agg(
         {'moyenne': ['mean'], 'tps': ['mean']})
     df.columns = df.columns.droplevel(1)
-    fig = plt.plot(df["moyenne"], df["tps"])
+    fig = plt.plot(df["taillePVC"], df["tps"])
     plt.xlabel("Nombre de villes")
     plt.ylabel("Temps d'exécution moyen de l'algorithme (ms)")
     plt.title("Temps d'exécution en fonction du nombre de villes")
@@ -137,7 +137,8 @@ nbIteration_tpsMs(df, "python/results/" + filename + "_4.png")
 filename = "tabu"
 df = pd.read_csv("data/" + filename + ".csv", sep=";")
 df = transform(df)
-for nb_iteration in range(50, 151, 10):    gen_table(df, nb_iteration, "python/results/" +
+for nb_iteration in range(50, 201, 10):    
+    gen_table(df, nb_iteration, "python/results/" +
               filename + "_" + str(nb_iteration) + ".png")
 taillePVC_distanceOpt(df, "python/results/" + filename + "_1.png")
 taillePVC_tpsMs(df, "python/results/" + filename + "_2.png")
