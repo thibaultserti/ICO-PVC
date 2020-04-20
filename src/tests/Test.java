@@ -29,7 +29,7 @@ public class Test {
 
     private final static int nbIterMaxRS = 10000;
     private final static int nbIterMaxAG = 1000;
-    private final static int nbIterMaxTabu = 300;
+    private final static int nbIterMaxTabu = 150;
 
 
     public Test() {
@@ -108,7 +108,7 @@ public class Test {
         new Thread(() -> {
             for (int i = 10; i <= 200; i += 10) {
                 String file = "data/cities" + i + ".csv";
-                for (numberOfIterationsAG = Defaults.numberOfIterationsAG; numberOfIterationsAG < nbIterMaxAG; numberOfIterationsAG += 100) {
+                for (numberOfIterationsAG = Defaults.numberOfIterationsAG; numberOfIterationsAG <= nbIterMaxAG; numberOfIterationsAG += 100) {
                     for (int j = 0; j < nbTests; j++) {
                         System.out.println("Pourcentage d'avancement AG : " + i + "/200 " + numberOfIterationsAG + "/"
                                 + nbIterMaxAG + " " + j + "/" + nbTests);
@@ -123,7 +123,7 @@ public class Test {
         new Thread(() -> {
             for (int i = 10; i <= 200; i += 10) {
                 String file = "data/cities" + i + ".csv";
-                for (numberOfIterationsRS = Defaults.numberOfIterationsRS; numberOfIterationsRS < nbIterMaxRS; numberOfIterationsRS += 100) {
+                for (numberOfIterationsRS = Defaults.numberOfIterationsRS; numberOfIterationsRS <= nbIterMaxRS; numberOfIterationsRS += 100) {
                     for (int j = 0; j < nbTests; j++) {
                         System.out.println("Pourcentage d'avancement RS : " + i + "/200 " + numberOfIterationsRS + "/"
                                 + nbIterMaxRS + " " + j + "/" + nbTests);
@@ -138,7 +138,7 @@ public class Test {
         new Thread(() -> {
             for (int i = 10; i <= 200; i += 10) {
                 String file = "data/cities" + i + ".csv";
-                for (numberOfIterationsTabu = Defaults.numberOfIterationsTabu; numberOfIterationsTabu < nbIterMaxTabu; numberOfIterationsTabu += 100) {
+                for (numberOfIterationsTabu = Defaults.numberOfIterationsTabu; numberOfIterationsTabu <= nbIterMaxTabu; numberOfIterationsTabu += 10) {
                     for (int j = 0; j < nbTests; j++) {
                         System.out.println("Pourcentage d'avancement Tabu : " + i + "/200 " + numberOfIterationsTabu
                                 + "/" + nbIterMaxTabu + " " + j + "/" + nbTests);
