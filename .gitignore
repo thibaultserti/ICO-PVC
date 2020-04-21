@@ -130,3 +130,7 @@ hs_err_pid*
 
 *.csv
 python/results/*.png
+
+# Created automatically by Jade
+APDescription.txt
+MTPs-Main-Container.txt

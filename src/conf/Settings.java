@@ -27,14 +27,14 @@ public class Settings {
             String[] tab;
 
             while ((s = file_source.readLine()) != null) {
-                if ((b.length == 0) || (b[0] == true)) {
+                if ((b.length == 0) || (b[0])) {
                     System.out.println(s);
                 }
                 tab = s.split(",");
                 cities.add(new City(tab[0], Double.parseDouble(tab[1]), Double.parseDouble(tab[2])));
             }
             file_source.close();
-            if ((b.length == 0) || (b[0] == true)) {
+            if ((b.length == 0) || (b[0])) {
                 System.out.println("File opened successfully");
             }
         } catch (
