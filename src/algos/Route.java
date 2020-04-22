@@ -12,7 +12,7 @@ public class Route {
     public String toString() {
         StringBuilder s = new StringBuilder();
         for (City c : cities) {
-            s.append(c.toString()+",");
+            s.append(c.toString()).append(",");
         }
         return s.toString();
     }

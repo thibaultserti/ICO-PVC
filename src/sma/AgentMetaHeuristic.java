@@ -10,10 +10,12 @@ import java.util.ArrayList;
 public abstract class AgentMetaHeuristic extends Agent {
     private Route bestSolution;
     private ArrayList<City> cities;
+    private int counter = 0;
+    private final int nbIterMax = 100;
 
     protected void setup() {
         System.out.println("Création de l'agent " + getLocalName());
-        cities = Settings.loadFile("data/cities10.csv", true);
+        cities = Settings.loadFile("data/cities20.csv", true);
         bestSolution = new Route(cities);
         addBehaviour(new Receiver(this));
 
@@ -37,4 +39,15 @@ public abstract class AgentMetaHeuristic extends Agent {
         bestSolution = new Route(route);
     }
 
+    protected int getCounter() {
+        return counter;
+    }
+
+     protected void incrCounter() {
+        this.counter ++;
+    }
+
+    public int getNbIterMax() {
+        return nbIterMax;
+    }
 }

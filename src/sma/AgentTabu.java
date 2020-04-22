@@ -1,28 +1,30 @@
 package sma;
 
-import algos.Route;
 import algos.Tabu;
+import conf.Colors;
 import jade.core.behaviours.SimpleBehaviour;
 
 public class AgentTabu extends AgentMetaHeuristic {
 
     private class CollaborationBehaviour extends SimpleBehaviour {
-        private final Route route;
         private boolean end = false;
         private final String[] dest = {"ag", "rs"};
 
-        public CollaborationBehaviour(Route route) {
-            this.route = route;
-        }
 
         public void action() {
-            Tabu tabu = new Tabu(route);
-            tabu.run(false);
-            if (tabu.getBestDistance() < getBestSolution().getTotalDistance()) {
-                setBestSolution(tabu.getBestSolution());
+            if (getCounter() <= getNbIterMax()) {
+                Tabu tabu = new Tabu(getBestSolution());
+                tabu.run(false);
+                if (tabu.getBestDistance() < getBestSolution().getTotalDistance()) {
+                    setBestSolution(tabu.getBestSolution());
+                }
+                myAgent.addBehaviour(new Sender(getBestSolution(), dest));
+                incrCounter();
+            } else {
+                System.out.println(Colors.ANSI_BLUE + "Done Tabu #" + Colors.ANSI_RESET);
+                end = true;
+                done();
             }
-            myAgent.addBehaviour(new Sender(getBestSolution(), dest));
-            end = true;
         }
 
         public boolean done() {
@@ -32,7 +34,7 @@ public class AgentTabu extends AgentMetaHeuristic {
 
     protected void setup() {
         super.setup();
-        addBehaviour(new AgentTabu.CollaborationBehaviour(new Route(getCities())));
+        addBehaviour(new CollaborationBehaviour());
     }
 
 }
