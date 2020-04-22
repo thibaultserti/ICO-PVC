@@ -18,7 +18,9 @@ public class AgentTabu extends AgentMetaHeuristic {
         public void action() {
             Tabu tabu = new Tabu(route);
             tabu.run(false);
-            setBestSolution(tabu.getBestSolution());
+            if (tabu.getBestDistance() < getBestSolution().getTotalDistance()) {
+                setBestSolution(tabu.getBestSolution());
+            }
             myAgent.addBehaviour(new Sender(getBestSolution(), dest));
             end = true;
         }

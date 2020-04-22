@@ -10,7 +10,11 @@ public class Route {
 
 
     public String toString() {
-        return Arrays.toString(cities.toArray());
+        StringBuilder s = new StringBuilder();
+        for (City c : cities) {
+            s.append(c.toString()+",");
+        }
+        return s.toString();
     }
 
     public Route(Route route) {
@@ -35,7 +39,7 @@ public class Route {
         return distTotal;
     }
 
-    public void swapCities(int a,int b) {
+    public void swapCities(int a, int b) {
         previousCities.clear();
         previousCities.addAll(cities);
         City x = cities.get(a);
@@ -47,7 +51,7 @@ public class Route {
     public void swapCities() {
         int a = generateRandomIndex();
         int b = generateRandomIndex();
-        swapCities(a,b);
+        swapCities(a, b);
     }
 
     public void revertSwap() {
@@ -58,7 +62,6 @@ public class Route {
     public int generateRandomIndex() {
         return (int) (Math.random() * cities.size());
     }
-
 
 
     public int size() {

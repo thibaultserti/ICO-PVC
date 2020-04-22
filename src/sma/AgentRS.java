@@ -18,7 +18,9 @@ public class AgentRS extends AgentMetaHeuristic {
         public void action() {
             RS rs = new RS(route);
             rs.run(false);
-            setBestSolution(rs.getBestSolution());
+            if (rs.getBestDistance() < getBestSolution().getTotalDistance()) {
+                setBestSolution(rs.getBestSolution());
+            }
             myAgent.addBehaviour(new Sender(getBestSolution(), dest));
             end = true;
         }

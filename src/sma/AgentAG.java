@@ -18,7 +18,10 @@ public class AgentAG extends AgentMetaHeuristic {
         public void action() {
             AG ag = new AG(route);
             ag.run(false);
-            setBestSolution(ag.getBestSolution());
+            if (ag.getBestDistance() < getBestSolution().getTotalDistance())
+            {
+                setBestSolution(ag.getBestSolution());
+            }
             myAgent.addBehaviour(new Sender(getBestSolution(), dest));
             end = true;
         }

@@ -12,10 +12,18 @@ public class City {
     private final String name;
 
     //Constructeurs
-    public City(String name, double latitude, double longitude) {
+    public City(String name, double latitude, double longitude, boolean... b) {
         this.name = name;
-        this.latitude = latitude * CONVERT_DEGREES_TO_RADIANS;
-        this.longitude = longitude * CONVERT_DEGREES_TO_RADIANS;
+
+        //2 constructeurs en fait, 1 qui convertit l'autre non
+        // (utilisé par le SMA Jade dans la communication)
+        if (b.length > 0 && b[0]) {
+            this.latitude = latitude;
+            this.longitude = longitude;
+        } else {
+            this.latitude = latitude * CONVERT_DEGREES_TO_RADIANS;
+            this.longitude = longitude * CONVERT_DEGREES_TO_RADIANS;
+        }
     }
 
     //get methods
@@ -33,8 +41,9 @@ public class City {
 
     //
     public String toString() {
-        return this.name;
+        return "" + this.name + ";" + this.latitude + ";" + this.longitude;
     }
+
     //Distance en Km entre 2 Villes
     public double measureDistance(City city) {
         double deltaLatitude = city.getLatitude() - this.getLatitude();
