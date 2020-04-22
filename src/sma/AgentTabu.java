@@ -10,22 +10,23 @@ import jade.core.behaviours.SimpleBehaviour;
 import java.util.ArrayList;
 
 public class AgentTabu extends Agent {
-    private static class RunBehaviour extends SimpleBehaviour {
+    private Route bestSolution;
+
+    private class CollaborationBehaviour extends SimpleBehaviour {
         private final Route route;
         private boolean end = false;
+        private final String[] dest = {"ag", "rs"};
 
-        public RunBehaviour(Agent a, Route route) {
-            super(a);
+        public CollaborationBehaviour(Route route) {
             this.route = route;
         }
 
         public void action() {
             Tabu tabu = new Tabu(route);
-            tabu.run(true);
-            System.out.println(tabu.getBestSolution());
-            System.out.println(tabu.getBestDistance());
+            tabu.run(false);
+            bestSolution = new Route(tabu.getBestSolution());
             end = true;
-            done();
+            myAgent.addBehaviour(new Sender(bestSolution, dest));
         }
 
         public boolean done() {
@@ -36,7 +37,8 @@ public class AgentTabu extends Agent {
     protected void setup() {
         System.out.println("Création de l'agent " + getLocalName());
         ArrayList<City> cities = Settings.loadFile("data/cities10.csv", true);
-        addBehaviour(new RunBehaviour(this, new Route(cities)));
+        addBehaviour(new CollaborationBehaviour(new Route(cities)));
+        addBehaviour(new Receiver());
 
     }
 
