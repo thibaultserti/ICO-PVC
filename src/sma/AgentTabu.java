@@ -1,16 +1,10 @@
 package sma;
 
-import algos.City;
 import algos.Route;
 import algos.Tabu;
-import conf.Settings;
-import jade.core.Agent;
 import jade.core.behaviours.SimpleBehaviour;
 
-import java.util.ArrayList;
-
-public class AgentTabu extends Agent {
-    private Route bestSolution;
+public class AgentTabu extends AgentMetaHeuristic {
 
     private class CollaborationBehaviour extends SimpleBehaviour {
         private final Route route;
@@ -24,9 +18,9 @@ public class AgentTabu extends Agent {
         public void action() {
             Tabu tabu = new Tabu(route);
             tabu.run(false);
-            bestSolution = new Route(tabu.getBestSolution());
+            setBestSolution(tabu.getBestSolution());
+            myAgent.addBehaviour(new Sender(getBestSolution(), dest));
             end = true;
-            myAgent.addBehaviour(new Sender(bestSolution, dest));
         }
 
         public boolean done() {
@@ -35,14 +29,8 @@ public class AgentTabu extends Agent {
     }
 
     protected void setup() {
-        System.out.println("Création de l'agent " + getLocalName());
-        ArrayList<City> cities = Settings.loadFile("data/cities10.csv", true);
-        addBehaviour(new CollaborationBehaviour(new Route(cities)));
-        addBehaviour(new Receiver());
-
+        super.setup();
+        addBehaviour(new AgentTabu.CollaborationBehaviour(new Route(getCities())));
     }
 
-    protected void takeDown() {
-        System.out.println("Destruction de l'agent " + getLocalName());
-    }
 }
