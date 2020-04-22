@@ -23,7 +23,8 @@ public class Settings {
         ArrayList<City> cities = new ArrayList<City>();
         try {
             BufferedReader file_source = new BufferedReader(new FileReader(path));
-            String s = file_source.readLine();
+            String s;
+            file_source.readLine();
             String[] tab;
 
             while ((s = file_source.readLine()) != null) {

@@ -72,7 +72,7 @@ public class RS implements Algo {
                 }
                 t *= coolingRate;
             }
-            if ((b.length == 0) || (b[0] == true)) {
+            if ((b.length == 0) || (b[0])) {
                 if (i % 100 == 0) {
                     System.out.println(Colors.ANSI_BLUE + "Iteration #" + i + Colors.ANSI_RESET);
                     System.out.println(Colors.ANSI_CYAN + "Température : " + Colors.ANSI_RESET + t);

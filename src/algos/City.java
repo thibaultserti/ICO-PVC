@@ -7,9 +7,9 @@ public class City {
     private static final double CONVERT_DEGREES_TO_RADIANS = Math.PI / 180D;
     private static final double CONVERT_KMS_TO_MILES = 0.621371;
     //attributs
-    private double longitude;
-    private double latitude;
-    private String name;
+    private final double longitude;
+    private final double latitude;
+    private final String name;
 
     //Constructeurs
     public City(String name, double latitude, double longitude) {

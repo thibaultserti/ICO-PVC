@@ -78,7 +78,7 @@ public class Tabu implements Algo {
             if (tabuList.size() > tabuListMaxSize) {
                 tabuList.remove(0);
             }
-            if ((b.length == 0) || (b[0] == true)){
+            if ((b.length == 0) || (b[0])){
 
                 if (i % 100 == 0) {
                     System.out.println(Colors.ANSI_BLUE + "Iteration #" + i + Colors.ANSI_RESET);
