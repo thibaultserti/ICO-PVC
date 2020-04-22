@@ -12,4 +12,6 @@ public final class Defaults {
 
     public static final int numberOfIterationsTabu = 50;
     public static final int tabuListMaxSize = 3;
+
+    public static final int nbIterMaxSMA = 100;
 }

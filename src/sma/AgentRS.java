@@ -11,8 +11,8 @@ public class AgentRS extends AgentMetaHeuristic {
         private final String[] dest = {"tabu", "ag"};
 
         public void action() {
-            if (getCounter() <= getNbIterMax()) {
-                RS rs = new RS(getBestSolution(), false);
+            if (getCounter() <= nbIterMax) {
+                RS rs = new RS(getBestSolution(),10,10000,0.9999, false);
                 rs.run(false);
                 if (rs.getBestDistance() < getBestSolution().getTotalDistance()) {
                     setBestSolution(rs.getBestSolution());

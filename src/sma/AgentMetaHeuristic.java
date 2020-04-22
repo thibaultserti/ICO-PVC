@@ -3,6 +3,7 @@ package sma;
 import algos.City;
 import algos.Route;
 import conf.Colors;
+import conf.Defaults;
 import conf.Settings;
 import jade.core.Agent;
 
@@ -12,7 +13,7 @@ public abstract class AgentMetaHeuristic extends Agent {
     private Route bestSolution;
     private ArrayList<City> cities;
     private int counter = 0;
-    private final int nbIterMax = 100;
+    public final int nbIterMax = Defaults.nbIterMaxSMA;
 
     protected void setup() {
         System.out.println("Création de l'agent " + getLocalName());
