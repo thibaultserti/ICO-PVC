@@ -45,7 +45,8 @@ public class AG implements Algo {
     }
 
     private void generateInit() {
-        for (int i = 0; i < populationSize; i++) {
+        routes.add(new Route(route));
+        for (int i = 1; i < populationSize; i++) {
             Route r = new Route(route);
             Collections.shuffle(r.getCities());
             routes.add(r);

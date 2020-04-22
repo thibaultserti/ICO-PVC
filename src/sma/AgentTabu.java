@@ -13,8 +13,9 @@ public class AgentTabu extends AgentMetaHeuristic {
 
         public void action() {
             if (getCounter() <= getNbIterMax()) {
-                Tabu tabu = new Tabu(getBestSolution());
-                tabu.run(false);
+
+                Tabu tabu = new Tabu(getBestSolution(), false);
+                Double a = tabu.run(false);
                 if (tabu.getBestDistance() < getBestSolution().getTotalDistance()) {
                     setBestSolution(tabu.getBestSolution());
                 }

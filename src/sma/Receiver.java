@@ -17,7 +17,7 @@ public class Receiver extends CyclicBehaviour {
     public void action() {
         ACLMessage msg = myAgent.receive();
         if (msg != null) {
-            System.out.println(msg.getSender() + " to " + myAgent.getLocalName() + " <- " + msg.getContent());
+            //System.out.println(msg.getSender() + " to " + myAgent.getLocalName() + " <- " + msg.getContent());
             // Jade ne permet pas de d'envoyer des objets Java donc on envoie une string
             // et on parse ...
             String[] message = msg.getContent().split(",");

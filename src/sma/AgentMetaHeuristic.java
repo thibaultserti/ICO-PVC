@@ -2,6 +2,7 @@ package sma;
 
 import algos.City;
 import algos.Route;
+import conf.Colors;
 import conf.Settings;
 import jade.core.Agent;
 
@@ -15,7 +16,7 @@ public abstract class AgentMetaHeuristic extends Agent {
 
     protected void setup() {
         System.out.println("Création de l'agent " + getLocalName());
-        cities = Settings.loadFile("data/cities20.csv", true);
+        cities = Settings.loadFile("data/cities20.csv", false);
         bestSolution = new Route(cities);
         addBehaviour(new Receiver(this));
 
@@ -24,7 +25,7 @@ public abstract class AgentMetaHeuristic extends Agent {
     protected void takeDown() {
         System.out.println("La meilleure solution de " + getLocalName() + " est " + bestSolution);
         System.out.println("de distance totale " + bestSolution.getTotalDistance());
-        System.out.println("Destruction de l'agent " + getLocalName());
+        System.out.println(Colors.ANSI_CYAN +"Destruction de l'agent " + getLocalName() + Colors.ANSI_RESET);
     }
 
     protected ArrayList<City> getCities() {
