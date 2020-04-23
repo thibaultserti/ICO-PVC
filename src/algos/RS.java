@@ -22,33 +22,45 @@ public class RS implements Algo {
         coolingRate = Defaults.coolingRate;
     }
 
-    public RS(Route route) {
+    public RS(Route route, boolean... b) {
         this();
         this.route = route;
-        Collections.shuffle(this.route.getCities());
+        if (b.length == 0 || b[0]){
+            shuffle();
+        }
     }
 
-    public RS(ArrayList<City> cities) {
+    public RS(ArrayList<City> cities, boolean... b) {
         this();
         this.route = new Route(cities);
-        Collections.shuffle(this.route.getCities());
+        if (b.length == 0 || b[0]){
+            shuffle();
+        }
 
     }
 
-    public RS(Route route, double startingTemperature, int numberOfIterations, double coolingRate) {
+    public RS(Route route, double startingTemperature, int numberOfIterations, double coolingRate, boolean... b) {
         this.route = route;
-        Collections.shuffle(this.route.getCities());
         this.startingTemperature = startingTemperature;
         this.numberOfIterations = numberOfIterations;
         this.coolingRate = coolingRate;
+        if (b.length == 0 || b[0]){
+            shuffle();
+        }
     }
 
-    public RS(ArrayList<City> cities, double startingTemperature, int numberOfIterations, double coolingRate) {
+    public RS(ArrayList<City> cities, double startingTemperature, int numberOfIterations, double coolingRate, boolean... b) {
         this.route = new Route(cities);
-        Collections.shuffle(this.route.getCities());
         this.startingTemperature = startingTemperature;
         this.numberOfIterations = numberOfIterations;
         this.coolingRate = coolingRate;
+        if (b.length == 0 || b[0]){
+            shuffle();
+        }
+    }
+
+    private void shuffle() {
+        Collections.shuffle(this.route.getCities());
     }
 
     public double run(boolean... b) {
@@ -72,7 +84,7 @@ public class RS implements Algo {
                 }
                 t *= coolingRate;
             }
-            if ((b.length == 0) || (b[0] == true)) {
+            if ((b.length == 0) || (b[0])) {
                 if (i % 100 == 0) {
                     System.out.println(Colors.ANSI_BLUE + "Iteration #" + i + Colors.ANSI_RESET);
                     System.out.println(Colors.ANSI_CYAN + "Température : " + Colors.ANSI_RESET + t);

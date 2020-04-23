@@ -35,6 +35,11 @@ qu'il suffit d'exécuter avec `python3 python/plots.py`
 Pour créer le dataset, il faut lancer le programme avec l'option `--dataset n`, n étant le nombre d'entrée 
 voulu pour chaque algorithme dans le dataset (finalement le nombre de ligne du dataset sera donc de 3*n) 
 
+### Système multi-agents
+
+Afin d'améliorer les performances nous avons mis en place un système multi-agent grâce à la plateforme JADE.
+Pour la tester, il suffit d'exécuter `make agent` ou bien `make agent-gui`.
+
 ## Pour compiler et exécuter :
 
 ### Linux :

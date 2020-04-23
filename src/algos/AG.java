@@ -45,7 +45,8 @@ public class AG implements Algo {
     }
 
     private void generateInit() {
-        for (int i = 0; i < populationSize; i++) {
+        routes.add(new Route(route));
+        for (int i = 1; i < populationSize; i++) {
             Route r = new Route(route);
             Collections.shuffle(r.getCities());
             routes.add(r);
@@ -134,7 +135,7 @@ public class AG implements Algo {
             routes = evolve(routes);
             bestSolution = getBestRoute(routes);
             bestDistance = bestSolution.getTotalDistance();
-            if ((b.length == 0)  || (b[0] == true)){
+            if ((b.length == 0)  || (b[0])){
                 if (i % 10 == 0) {
                     System.out.println(Colors.ANSI_BLUE + "Iteration #" + i + Colors.ANSI_RESET);
                     System.out.println(Colors.ANSI_CYAN + "Routes : " + Colors.ANSI_RESET + routes);

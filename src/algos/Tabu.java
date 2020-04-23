@@ -19,22 +19,32 @@ public class Tabu implements Algo {
         numberOfIterations = Defaults.numberOfIterationsTabu;
     }
 
-    public Tabu(Route route) {
+    public Tabu(Route route, boolean... b) {
         this();
         this.route = route;
-        Collections.shuffle(this.route.getCities());
+        if (b.length == 0 || b[0]) {
+            shuffle();
+        }
     }
 
-    public Tabu(ArrayList<City> cities) {
+    public Tabu(ArrayList<City> cities, boolean... b) {
         this();
         this.route = new Route(cities);
-        Collections.shuffle(this.route.getCities());
+        if (b.length == 0 || b[0]) {
+            shuffle();
+        }
     }
 
-    public Tabu(Route route, int numberOfIterations, int maxTabu) {
+    public Tabu(Route route, int numberOfIterations, int maxTabu, boolean... b) {
         this.route = route;
         this.tabuListMaxSize = maxTabu;
         this.numberOfIterations = numberOfIterations;
+        if (b.length == 0 || b[0]) {
+            shuffle();
+        }
+    }
+
+    private void shuffle() {
         Collections.shuffle(this.route.getCities());
     }
 
@@ -78,7 +88,7 @@ public class Tabu implements Algo {
             if (tabuList.size() > tabuListMaxSize) {
                 tabuList.remove(0);
             }
-            if ((b.length == 0) || (b[0] == true)){
+            if ((b.length == 0) || (b[0])) {
 
                 if (i % 100 == 0) {
                     System.out.println(Colors.ANSI_BLUE + "Iteration #" + i + Colors.ANSI_RESET);
