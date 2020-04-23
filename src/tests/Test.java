@@ -92,7 +92,7 @@ public class Test {
 
     public void createDataset(int tailleDataset) {
         writeToFile("data/dataset.csv", "algo;taillePVC;nbIterationAlgo;param1;param2;param3;distanceOpt;tpsMs\n");
-        
+
         new Thread(() -> {
             for (int i = 0; i < tailleDataset; i++) {
                 numberOfIterationsAG = (int) (100 + Math.random() * 901);
