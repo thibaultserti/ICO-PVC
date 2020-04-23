@@ -51,11 +51,9 @@ public class Main {
 
                 options = new ArrayList<>();
                 params.put(a.substring(1), options);
-            }
-            else if (options != null) {
+            } else if (options != null) {
                 options.add(a);
-            }
-            else {
+            } else {
                 System.err.println("Illegal parameter usage");
                 return;
             }
@@ -63,12 +61,15 @@ public class Main {
 
         if (params.containsKey("-gui")) {
             JFrame GUI = new GUI();
-        } else if (params.containsKey("-benchmark")){
+        } else if (params.containsKey("-benchmark")) {
             int n = Integer.parseInt(params.get("-benchmark").get(0));
             Test test = new Test();
             test.run(n);
-        }
-        else {
+        } else if (params.containsKey("-dataset")) {
+            int n = Integer.parseInt((params.get("-dataset").get(0)));
+            Test test = new Test();
+            test.createDataset(n);
+        } else {
             cities = loadFile("data/cities.csv");
             testAG();
             testRS();
