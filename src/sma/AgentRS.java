@@ -6,13 +6,14 @@ import jade.core.behaviours.SimpleBehaviour;
 
 public class AgentRS extends AgentMetaHeuristic {
 
-    private class CollaborationBehaviour extends SimpleBehaviour {
-        private boolean end = false;
-        private final String[] dest = {"tabu", "ag"};
+    private class CollaborationBehaviour extends InteractionBehaviour {
+        public CollaborationBehaviour() {
+            super(new String[]{"ag", "tabu"});
+        }
 
         public void action() {
             if (getCounter() <= nbIterMax) {
-                RS rs = new RS(getBestSolution(),10,10000,0.9999, false);
+                RS rs = new RS(getBestSolution(), 10, 10000, 0.9999, false);
                 rs.run(false);
                 if (rs.getBestDistance() < getBestSolution().getTotalDistance()) {
                     setBestSolution(rs.getBestSolution());

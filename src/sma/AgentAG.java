@@ -6,9 +6,10 @@ import jade.core.behaviours.SimpleBehaviour;
 
 public class AgentAG extends AgentMetaHeuristic {
 
-    private class CollaborationBehaviour extends SimpleBehaviour {
-        private boolean end = false;
-        private final String[] dest = {"rs", "tabu"};
+    private class CollaborationBehaviour extends InteractionBehaviour {
+        public CollaborationBehaviour() {
+            super(new String[]{"tabu", "rs"});
+        }
 
         public void action() {
             if (getCounter() <= nbIterMax) {
