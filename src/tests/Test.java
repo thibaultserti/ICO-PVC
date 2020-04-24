@@ -61,6 +61,7 @@ public class Test {
     }
 
     private double[] testRS(String file) {
+        coolingRate = (numberOfIterationsRS - 1) /100.;
         cities = loadFile(file, false);
         Route route = new Route(cities);
         RS rs = new RS(route, startingTemperature, numberOfIterationsRS, coolingRate);

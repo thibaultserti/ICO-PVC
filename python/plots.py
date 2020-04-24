@@ -114,7 +114,7 @@ def transform(df):
 filename = "rs"
 df = pd.read_csv("data/" + filename + ".csv", sep=";")
 df = transform(df)
-for nb_iteration in range(100, 2001, 100):
+for nb_iteration in range(100, 10001, 100):
     gen_table(df, nb_iteration, "python/results/" +
               filename + "_" + str(nb_iteration) + ".png")
 taillePVC_distanceOpt(df, "python/results/" + filename + "_1.png")
