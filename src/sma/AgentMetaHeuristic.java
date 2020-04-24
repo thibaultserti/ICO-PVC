@@ -20,7 +20,7 @@ public abstract class AgentMetaHeuristic extends Agent {
         Object[] args = getArguments();
         this.typeOfInteraction = args[0].toString();
         System.out.println("Création de l'agent " + getLocalName());
-        cities = Settings.loadFile("data/cities20.csv", false);
+        cities = Settings.loadFile("data/cities.csv", false);
         bestSolution = new Route(cities);
         if (typeOfInteraction.equals("collaboration")) {
             addBehaviour(new Receiver(this, "collaboration"));
