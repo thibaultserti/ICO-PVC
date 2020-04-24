@@ -9,4 +9,8 @@ public abstract class InteractionBehaviour extends SimpleBehaviour {
     public InteractionBehaviour(String[] dest) {
         this.dest = dest;
     }
+
+    public boolean done() {
+        return end;
+    }
 }

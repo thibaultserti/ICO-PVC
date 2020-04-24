@@ -1,9 +1,12 @@
 package sma;
 
 import algos.AG;
+import com.sun.corba.se.impl.protocol.AddressingDispositionException;
 import conf.Colors;
+import conf.Defaults;
 
 public class AgentAG extends AgentMetaHeuristic {
+    private int nbIteration = Defaults.numberOfIterationsAG;
 
     private class CollaborationBehaviour extends InteractionBehaviour {
         public CollaborationBehaviour() {
@@ -11,7 +14,7 @@ public class AgentAG extends AgentMetaHeuristic {
         }
 
         public void action() {
-            if (getCounter() <= nbIterMax) {
+            if (getCounter() <= getNbIterMax()) {
                 AG ag = new AG(getBestSolution());
                 ag.run(false);
                 if (ag.getBestDistance() < getBestSolution().getTotalDistance()) {
@@ -26,15 +29,44 @@ public class AgentAG extends AgentMetaHeuristic {
                 doDelete();
             }
         }
+    }
 
-        public boolean done() {
-            return end;
+    private class CompetitionBehaviour extends InteractionBehaviour {
+
+        public CompetitionBehaviour() {
+            super(new String[]{"ag", "tabu"});
         }
+
+        public void action() {
+            if (getCounter() <= getNbIterMax()) {
+                AG ag = new AG(getBestSolution(), Defaults.mutationRate, Defaults.arenaSize, nbIteration, Defaults.populationSize);
+                ag.run(false);
+                if (ag.getBestDistance() < getBestSolution().getTotalDistance()) {
+                    setBestSolution(ag.getBestSolution());
+                }
+                myAgent.addBehaviour(new Sender(getBestSolution(), dest));
+                incrCounter();
+            } else {
+                System.out.println(Colors.ANSI_BLUE + "Done AG #" + Colors.ANSI_RESET);
+                end = true;
+                done();
+                doDelete();
+            }
+        }
+
     }
 
     protected void setup() {
         super.setup();
-        addBehaviour(new CollaborationBehaviour());
+        if (getTypeOfInteraction().equals("collaboration")) {
+            addBehaviour(new CollaborationBehaviour());
+        } else if (getTypeOfInteraction().equals(("competition"))) {
+            addBehaviour(new CompetitionBehaviour());
+        }
+    }
+
+    public void incrNbIteration() {
+        nbIteration += (int) (Defaults.numberOfIterationsAG / 10.);
     }
 
 }
