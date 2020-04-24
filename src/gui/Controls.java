@@ -107,7 +107,7 @@ public class Controls extends JPanel {
         JLabel labelNbIterationsTabu = new JLabel("Nombre d'itérations : " + numberOfIterationsTabu);
         JSlider slideNbIterationsTabu = new JSlider();
         slideNbIterationsTabu.setMaximum(1000);
-        slideNbIterationsTabu.setMinimum(100);
+        slideNbIterationsTabu.setMinimum(50);
         slideNbIterationsTabu.setValue(numberOfIterationsTabu);
         slideNbIterationsTabu.setPaintTicks(true);
         slideNbIterationsTabu.setMinorTickSpacing(50);
@@ -140,7 +140,7 @@ public class Controls extends JPanel {
         JLabel labelNbIterationsRS = new JLabel("Nombre d'itérations : " + numberOfIterationsRS);
         JSlider slideNbIterationsRS = new JSlider();
         slideNbIterationsRS.setMaximum(10000);
-        slideNbIterationsRS.setMinimum(1000);
+        slideNbIterationsRS.setMinimum(100);
         slideNbIterationsRS.setValue(numberOfIterationsRS);
         slideNbIterationsRS.setPaintTicks(true);
         slideNbIterationsRS.setMinorTickSpacing(500);
@@ -206,7 +206,7 @@ public class Controls extends JPanel {
         JLabel labelPop = new JLabel("Taille de la population : " + populationSize);
         JSlider slidePop = new JSlider();
         slidePop.setMaximum(200);
-        slidePop.setMinimum(50);
+        slidePop.setMinimum(10);
         slidePop.setValue(populationSize);
         slidePop.setPaintTicks(true);
         slidePop.setMinorTickSpacing(10);
