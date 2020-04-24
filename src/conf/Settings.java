@@ -5,7 +5,7 @@ import algos.City;
 import java.io.*;
 import java.util.ArrayList;
 
-public class Settings {
+public final class Settings {
 
     public static void writeToFile(String fileName, String text) {
         try {
