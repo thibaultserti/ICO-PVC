@@ -2,7 +2,6 @@ package sma;
 
 import algos.AG;
 import conf.Colors;
-import jade.core.behaviours.SimpleBehaviour;
 
 public class AgentAG extends AgentMetaHeuristic {
 
@@ -24,6 +23,7 @@ public class AgentAG extends AgentMetaHeuristic {
                 System.out.println(Colors.ANSI_BLUE + "Done AG #" + Colors.ANSI_RESET);
                 end = true;
                 done();
+                doDelete();
             }
         }
 

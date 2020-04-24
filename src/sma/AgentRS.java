@@ -2,7 +2,6 @@ package sma;
 
 import algos.RS;
 import conf.Colors;
-import jade.core.behaviours.SimpleBehaviour;
 
 public class AgentRS extends AgentMetaHeuristic {
 
@@ -24,6 +23,7 @@ public class AgentRS extends AgentMetaHeuristic {
                 System.out.println(Colors.ANSI_BLUE + "Done RS #" + Colors.ANSI_RESET);
                 end = true;
                 done();
+                doDelete();
             }
         }
 

@@ -2,7 +2,6 @@ package sma;
 
 import algos.Tabu;
 import conf.Colors;
-import jade.core.behaviours.SimpleBehaviour;
 
 public class AgentTabu extends AgentMetaHeuristic {
 
@@ -26,6 +25,8 @@ public class AgentTabu extends AgentMetaHeuristic {
                 System.out.println(Colors.ANSI_BLUE + "Done Tabu #" + Colors.ANSI_RESET);
                 end = true;
                 done();
+                doDelete();
+
             }
         }
 
