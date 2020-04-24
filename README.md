@@ -32,27 +32,38 @@ qu'il suffit d'exécuter avec `python3 python/plots.py`
 
 ### Dataset :
 
-Pour créer le dataset, il faut lancer le programme avec l'option `--dataset n`, n étant le nombre d'entrée 
-voulu pour chaque algorithme dans le dataset (finalement le nombre de ligne du dataset sera donc de 3*n) 
+Pour créer le dataset, il faut lancer le programme avec l'option `--dataset n`, n étant le nombre d'entrées
+voulu pour chaque algorithme dans le dataset (finalement le nombre de lignes du dataset sera donc de 3*n) 
 
 ### Système multi-agents
 
-Afin d'améliorer les performances nous avons mis en place un système multi-agent grâce à la plateforme JADE.
-Pour la tester, il suffit d'exécuter `make agent` ou bien `make agent-gui`.
+Afin d'améliorer les performances nous avons mis en place un système multi-agents grâce à la plateforme JADE.
+Il existe deux modes d'interaction pour le système multi-agents : par collaboration et par compétition.
+Pour lancer le programme en mode système multi-agent, on peut compiler le projet puis exécuter `java -classpath lib/jade/jade.jar:bin/:src/ -gui jade.Boot "ag:sma.AgentAG(competition);rs:sma.AgentRS(competition);tabu:sma.AgentTabu(competition)"`
+ou bien tout simplement se référer au makefile.
 
 ## Pour compiler et exécuter :
 
-### Linux :
+### Linux et Mac OSX:
 
 Dans un premier temps il faut installer `jq` car il est utilisé dans le script de récupération de villes.
 Sous Debian, Ubuntu ou un dérivé : `apt install jq`.
+
 Depuis un terminal, placez-vous dans le dossier principal du projet (où le fichier `Makefile` est présent) et lancez `make build` pour compiler, puis `make run` pour exécuter en ligne de commande et `make run-gui` pour exécuter avec l'interface graphique.
+
 Pour lancer les tests lancer : `make run-tests`.
+
 Pour créer le dataset : `make dataset`.
+
+Pour tester le mode par collaboration, il suffit d'exécuter `make agent-collaboration` ou bien `make agent-collaboration-gui`.
+
+Pour tester le mode par compétition, il suffit d'exécuter `make agent-competition` ou bien `make agent-competition-gui`. 
+
 Pour supprimer tous les csv et png générés : `make clean`
 
 ### Windows :
 
 Depuis un terminal, placez-vous dans le dossier principal du projet et lancez : `javac -classpath "lib/*.jar":"src/*.java" -d bin src/*.java src/algos/*.java src/gui/*.java`
+
 Ensuite lancez `java -classpath bin Main` pour exécuter le programme en ligne de commande et `java -classpath bin Main --gui` pour exécuter avec une interface graphique.
 
