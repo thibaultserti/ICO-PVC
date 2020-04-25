@@ -92,7 +92,7 @@ public class Test {
     }
 
     public void createDataset(int tailleDataset) {
-        writeToFile("data/dataset.csv", "algo;taillePVC;nbIterationAlgo;param1;param2;param3;distanceOpt;tpsMs\n");
+        writeToFile("tests/data/dataset.csv", "algo;taillePVC;nbIterationAlgo;param1;param2;param3;distanceOpt;tpsMs\n");
 
         new Thread(() -> {
             for (int i = 0; i < tailleDataset; i++) {
@@ -101,13 +101,13 @@ public class Test {
                 arenaSize = (int) (2 + Math.random() * 14);
                 mutationRate = Math.random() * 0.1;
                 int nbCities = (int) (1 + Math.random() * 10) * 10;
-                String file = "data/cities" + nbCities + ".csv";
+                String file = "tests/data/cities" + nbCities + ".csv";
                 System.out.println("Pourcentage d'avancement AG : " + ((double) i / (double) tailleDataset) * 100 + "%");
                 double[] res;
                 res = testAG(file);
                 String s = "ag;" + nbCities + ";" + numberOfIterationsAG + ";" + populationSize + ";" + arenaSize + ";"
                         + mutationRate + ";" + res[0] + ";" + res[1] / 1000000 + "\n";
-                writeToFile("data/dataset.csv", s);
+                writeToFile("tests/data/dataset.csv", s);
             }
         }).start();
 
@@ -117,13 +117,13 @@ public class Test {
                 startingTemperature = (int) (10 + Math.random() * 901);
                 coolingRate = 0.98 + (Math.random() * 0.02);
                 int nbCities = (int) (1 + Math.random() * 10) * 10;
-                String file = "data/cities" + nbCities + ".csv";
+                String file = "tests/data/cities" + nbCities + ".csv";
                 System.out.println("Pourcentage d'avancement RS : " + ((double) i / (double) tailleDataset) * 100 + "%");
                 double[] res;
                 res = testAG(file);
                 String s = "rs;" + nbCities + ";" + numberOfIterationsAG + ";" + startingTemperature + ";" + coolingRate + ";"
                         + "NaN" + ";" + res[0] + ";" + res[1] / 1000000 + "\n";
-                writeToFile("data/dataset.csv", s);
+                writeToFile("tests/data/dataset.csv", s);
             }
         }).start();
         new Thread(() -> {
@@ -131,13 +131,13 @@ public class Test {
                 numberOfIterationsTabu = (int) (100 + Math.random() * 101);
                 tabuListMaxSize = (int) (1 + Math.random() * 9);
                 int nbCities = (int) (1 + Math.random() * 10) * 10;
-                String file = "data/cities" + nbCities + ".csv";
+                String file = "tests/data/cities" + nbCities + ".csv";
                 System.out.println("Pourcentage d'avancement Tabu : " + ((double) i / (double) tailleDataset) * 100 + "%");
                 double[] res;
                 res = testAG(file);
                 String s = "tabu;" + nbCities + ";" + numberOfIterationsAG + ";" + tabuListMaxSize + ";" + "NaN" + ";"
                         + "NaN" + ";" + res[0] + ";" + res[1] / 1000000 + "\n";
-                writeToFile("data/dataset.csv", s);
+                writeToFile("tests/data/dataset.csv", s);
             }
         }).start();
     }
@@ -145,7 +145,7 @@ public class Test {
 
     public void run(int nbTests) {
         try {
-            Process proc = Runtime.getRuntime().exec("rm -f data/ag.csv data/rs.csv data/tabu.csv");
+            Process proc = Runtime.getRuntime().exec("rm -f tests/data/ag.csv tests/data/rs.csv tests/data/tabu.csv");
             BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream()));
             String s = null;
             while ((s = stdInput.readLine()) != null) {
@@ -155,20 +155,20 @@ public class Test {
             System.out.println(e.getMessage());
         }
 
-        writeToFile("data/ag.csv", "taillePVC;nbIterationAlgo;distanceOpt;tpsMs\n");
-        writeToFile("data/rs.csv", "taillePVC;nbIterationAlgo;distanceOpt;tpsMs\n");
-        writeToFile("data/tabu.csv", "taillePVC;nbIterationAlgo;distanceOpt;tpsMs\n");
+        writeToFile("tests/data/ag.csv", "taillePVC;nbIterationAlgo;distanceOpt;tpsMs\n");
+        writeToFile("tests/data/rs.csv", "taillePVC;nbIterationAlgo;distanceOpt;tpsMs\n");
+        writeToFile("tests/data/tabu.csv", "taillePVC;nbIterationAlgo;distanceOpt;tpsMs\n");
 
         new Thread(() -> {
             for (int i = 10; i <= 200; i += 10) {
-                String file = "data/cities" + i + ".csv";
+                String file = "tests/data/cities" + i + ".csv";
                 for (numberOfIterationsAG = Defaults.numberOfIterationsAG; numberOfIterationsAG <= nbIterMaxAG; numberOfIterationsAG += 100) {
                     for (int j = 0; j < nbTests; j++) {
                         System.out.println("Pourcentage d'avancement AG : " + i + "/200 " + numberOfIterationsAG + "/"
                                 + nbIterMaxAG + " " + j + "/" + nbTests);
                         double[] res;
                         res = testAG(file);
-                        writeToFile("data/ag.csv",
+                        writeToFile("tests/data/ag.csv",
                                 i + ";" + numberOfIterationsAG + ";" + res[0] + ";" + res[1] / 1000000 + "\n");
                     }
                 }
@@ -176,14 +176,14 @@ public class Test {
         }).start();
         new Thread(() -> {
             for (int i = 10; i <= 200; i += 10) {
-                String file = "data/cities" + i + ".csv";
+                String file = "tests/data/cities" + i + ".csv";
                 for (numberOfIterationsRS = Defaults.numberOfIterationsRS; numberOfIterationsRS <= nbIterMaxRS; numberOfIterationsRS += 1000) {
                     for (int j = 0; j < nbTests; j++) {
                         System.out.println("Pourcentage d'avancement RS : " + i + "/200 " + numberOfIterationsRS + "/"
                                 + nbIterMaxRS + " " + j + "/" + nbTests);
                         double[] res;
                         res = testRS(file);
-                        writeToFile("data/rs.csv",
+                        writeToFile("tests/data/rs.csv",
                                 i + ";" + numberOfIterationsRS + ";" + res[0] + ";" + res[1] / 1000000 + "\n");
                     }
                 }
@@ -191,14 +191,14 @@ public class Test {
         }).start();
         new Thread(() -> {
             for (int i = 10; i <= 100; i += 10) {
-                String file = "data/cities" + i + ".csv";
+                String file = "tests/data/cities" + i + ".csv";
                 for (numberOfIterationsTabu = Defaults.numberOfIterationsTabu; numberOfIterationsTabu <= nbIterMaxTabu; numberOfIterationsTabu += 10) {
                     for (int j = 0; j < nbTests; j++) {
                         System.out.println("Pourcentage d'avancement Tabu : " + i + "/100 " + numberOfIterationsTabu
                                 + "/" + nbIterMaxTabu + " " + j + "/" + nbTests);
                         double[] res;
                         res = testTabu(file);
-                        writeToFile("data/tabu.csv",
+                        writeToFile("tests/data/tabu.csv",
                                 i + ";" + numberOfIterationsTabu + ";" + res[0] + ";" + res[1] / 1000000 + "\n");
                     }
                 }

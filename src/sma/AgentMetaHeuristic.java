@@ -60,7 +60,7 @@ public abstract class AgentMetaHeuristic extends Agent {
         long timeStop = System.nanoTime();
         double time = (timeStop - timeStart) / 1000000.;
         System.out.println("Temps écoulé : " + time + "ms");
-        writeToFile("data/sma.csv", typeOfInteraction + ";" + nbCities + ";" +
+        writeToFile("tests/data/sma.csv", typeOfInteraction + ";" + nbCities + ";" +
                 bestSolution.getTotalDistance() + ";" + time + "\n");
         if (nbAgentsDown == 3) {
             terminate();
