@@ -13,14 +13,13 @@ public class AgentAG extends AgentMetaHeuristic {
         }
 
         public void action() {
-            if (getCounter() <= getNbIterMax()) {
+            if (getTimeElapsed() <= getTimeMax()) {
                 AG ag = new AG(getBestSolution());
                 ag.run(false);
                 if (ag.getBestDistance() < getBestSolution().getTotalDistance()) {
                     setBestSolution(ag.getBestSolution());
                 }
                 myAgent.addBehaviour(new Sender(getBestSolution(), dest));
-                incrCounter();
             } else {
                 System.out.println(Colors.ANSI_BLUE + "Done AG #" + Colors.ANSI_RESET);
                 end = true;
@@ -37,14 +36,13 @@ public class AgentAG extends AgentMetaHeuristic {
         }
 
         public void action() {
-            if (getCounter() <= getNbIterMax()) {
+            if (getTimeElapsed() <= getTimeMax()) {
                 AG ag = new AG(getBestSolution(), Defaults.mutationRate, Defaults.arenaSize, nbIteration, Defaults.populationSize);
                 ag.run(false);
                 if (ag.getBestDistance() < getBestSolution().getTotalDistance()) {
                     setBestSolution(ag.getBestSolution());
                 }
                 myAgent.addBehaviour(new Sender(getBestSolution(), dest));
-                incrCounter();
             } else {
                 System.out.println(Colors.ANSI_BLUE + "Done AG #" + Colors.ANSI_RESET);
                 end = true;

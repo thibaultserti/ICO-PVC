@@ -13,14 +13,13 @@ public class AgentRS extends AgentMetaHeuristic {
         }
 
         public void action() {
-            if (getCounter() <= getNbIterMax()) {
+            if (getTimeElapsed() <= getTimeMax()) {
                 RS rs = new RS(getBestSolution(), false);
                 rs.run(false);
                 if (rs.getBestDistance() < getBestSolution().getTotalDistance()) {
                     setBestSolution(rs.getBestSolution());
                 }
                 myAgent.addBehaviour(new Sender(getBestSolution(), dest));
-                incrCounter();
             } else {
                 System.out.println(Colors.ANSI_BLUE + "Done RS #" + Colors.ANSI_RESET);
                 end = true;
@@ -37,14 +36,13 @@ public class AgentRS extends AgentMetaHeuristic {
         }
 
         public void action() {
-            if (getCounter() <= getNbIterMax()) {
+            if (getTimeElapsed() <= getTimeMax()) {
                 RS rs = new RS(getBestSolution(), 10, nbIteration, 0.9999, false);
                 rs.run(false);
                 if (rs.getBestDistance() < getBestSolution().getTotalDistance()) {
                     setBestSolution(rs.getBestSolution());
                 }
                 myAgent.addBehaviour(new Sender(getBestSolution(), dest));
-                incrCounter();
             } else {
                 System.out.println(Colors.ANSI_BLUE + "Done RS #" + Colors.ANSI_RESET);
                 end = true;
