@@ -27,7 +27,7 @@ public class Test {
     private int numberOfIterationsTabu;
     private int tabuListMaxSize;
 
-    private final static int nbIterMaxRS = 10000;
+    private final static int nbIterMaxRS = 100000;
     private final static int nbIterMaxAG = 1000;
     private final static int nbIterMaxTabu = 200;
 
@@ -177,7 +177,7 @@ public class Test {
         new Thread(() -> {
             for (int i = 10; i <= 200; i += 10) {
                 String file = "data/cities" + i + ".csv";
-                for (numberOfIterationsRS = Defaults.numberOfIterationsRS; numberOfIterationsRS <= nbIterMaxRS; numberOfIterationsRS += 100) {
+                for (numberOfIterationsRS = Defaults.numberOfIterationsRS; numberOfIterationsRS <= nbIterMaxRS; numberOfIterationsRS += 1000) {
                     for (int j = 0; j < nbTests; j++) {
                         System.out.println("Pourcentage d'avancement RS : " + i + "/200 " + numberOfIterationsRS + "/"
                                 + nbIterMaxRS + " " + j + "/" + nbTests);

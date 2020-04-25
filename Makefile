@@ -17,4 +17,4 @@ agent-competition:
 agent-competition-gui:
 	java -classpath bin/:lib/jade/jade.jar:src/ jade.Boot -agents "ag:sma.AgentAG(competition);rs:sma.AgentRS(competition);tabu:sma.AgentTabu(competition)"
 clean:
-	rm data/ag.csv data/rs.csv data/tabu.csv data/dataset.csv python/results/*
+	rm data/ag.csv data/rs.csv data/tabu.csv data/dataset.csv data/sma.csv python/results/*

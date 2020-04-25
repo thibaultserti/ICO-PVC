@@ -21,8 +21,8 @@ import static conf.Settings.writeToFile;
 public abstract class AgentMetaHeuristic extends Agent {
     private Route bestSolution;
     private ArrayList<City> cities;
-
-    private final double timeMax = Defaults.timeMaxSMA;
+    private int nbCities = Defaults.nbCitiesSMA;
+    private int timeMax = Defaults.timeMaxSMA;
     private String typeOfInteraction;
     private static long timeStart;
     private static int nbAgentsDown = 0;
@@ -30,8 +30,14 @@ public abstract class AgentMetaHeuristic extends Agent {
     protected void setup() {
         Object[] args = getArguments();
         this.typeOfInteraction = args[0].toString();
+        if (args.length >= 2) {
+            this.nbCities = Integer.parseInt(args[1].toString());
+        }
         System.out.println("Création de l'agent " + getLocalName());
-        cities = Settings.loadFile("data/cities.csv", false);
+        cities = Settings.loadFile("data/cities" + nbCities + ".csv", false);
+        if (args.length == 3) {
+            timeMax = Integer.parseInt(args[2].toString());
+        }
         bestSolution = new Route(cities);
         if (typeOfInteraction.equals("collaboration")) {
             addBehaviour(new Receiver(this, "collaboration"));
@@ -54,7 +60,8 @@ public abstract class AgentMetaHeuristic extends Agent {
         long timeStop = System.nanoTime();
         double time = (timeStop - timeStart) / 1000000.;
         System.out.println("Temps écoulé : " + time + "ms");
-        writeToFile("data/sma.csv", typeOfInteraction + ";" + bestSolution.getTotalDistance() + ";" + time + "\n");
+        writeToFile("data/sma.csv", typeOfInteraction + ";" + nbCities + ";" +
+                bestSolution.getTotalDistance() + ";" + time + "\n");
         if (nbAgentsDown == 3) {
             terminate();
         }

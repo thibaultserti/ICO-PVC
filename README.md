@@ -42,6 +42,10 @@ Il existe deux modes d'interaction pour le système multi-agents : par collabora
 Pour lancer le programme en mode système multi-agent, on peut compiler le projet puis exécuter `java -classpath lib/jade/jade.jar:bin/:src/ -gui jade.Boot "ag:sma.AgentAG(competition);rs:sma.AgentRS(competition);tabu:sma.AgentTabu(competition)"`
 ou bien tout simplement se référer au makefile.
 
+Pour tester le SMA, il y a un script `testsSMA.sh`, qui enregistre les résultats dans `sma.csv`.
+
+**Attention :** tous les tests nécessitent d'avoir téléchargé au préalable les fichiers `cities10.csv` à `cities200.csv`
+
 ## Pour compiler et exécuter :
 
 ### Linux et Mac OSX:
