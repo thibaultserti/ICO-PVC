@@ -27,7 +27,7 @@ public class Test {
     private int numberOfIterationsTabu;
     private int tabuListMaxSize;
 
-    private final static int nbIterMaxRS = 100000;
+    private final static int nbIterMaxRS = 50000;
     private final static int nbIterMaxAG = 1000;
     private final static int nbIterMaxTabu = 200;
 
