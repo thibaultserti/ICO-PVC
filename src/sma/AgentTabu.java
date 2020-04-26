@@ -13,7 +13,7 @@ public class AgentTabu extends AgentMetaHeuristic {
         }
 
         public void action() {
-            if (getCounter() <= getNbIterMax()) {
+            if (getTimeElapsed() <= getTimeMax()) {
 
                 Tabu tabu = new Tabu(getBestSolution(), false);
                 Double a = tabu.run(false);
@@ -21,7 +21,6 @@ public class AgentTabu extends AgentMetaHeuristic {
                     setBestSolution(tabu.getBestSolution());
                 }
                 myAgent.addBehaviour(new Sender(getBestSolution(), dest));
-                incrCounter();
             } else {
                 System.out.println(Colors.ANSI_BLUE + "Done Tabu #" + Colors.ANSI_RESET);
                 end = true;
@@ -39,14 +38,13 @@ public class AgentTabu extends AgentMetaHeuristic {
         }
 
         public void action() {
-            if (getCounter() <= getNbIterMax()) {
+            if (getTimeElapsed() <= getTimeMax()) {
                 Tabu tabu = new Tabu(getBestSolution(), nbIteration, Defaults.tabuListMaxSize, false);
                 tabu.run(false);
                 if (tabu.getBestDistance() < getBestSolution().getTotalDistance()) {
                     setBestSolution(tabu.getBestSolution());
                 }
                 myAgent.addBehaviour(new Sender(getBestSolution(), dest));
-                incrCounter();
             } else {
                 System.out.println(Colors.ANSI_BLUE + "Done Tabu #" + Colors.ANSI_RESET);
                 end = true;

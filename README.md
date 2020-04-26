@@ -26,7 +26,7 @@ de tests que l'on veut faire pour chaque possibilité de lancement.
 Cela génère des fichiers `ag.csv`, `rs.csv`, `tabu.csv` qu contiennent dans cet ordre : 
 le nombre de villes, la distance optimale trouvée et le temps d'exécution.
 Ensuite, il est possible de générer des courbes et des tableaux récapitulatifs avec le script python,
-qu'il suffit d'exécuter avec `python3 python/plots.py`
+qu'il suffit d'exécuter avec `python3 tests/plots.py`
 
 **Attention :** le temps d'exécution est déjà assez long pour n=1, cela prend déjà 5 minutes. (à cause de Tabu)
 
@@ -41,6 +41,10 @@ Afin d'améliorer les performances nous avons mis en place un système multi-age
 Il existe deux modes d'interaction pour le système multi-agents : par collaboration et par compétition.
 Pour lancer le programme en mode système multi-agent, on peut compiler le projet puis exécuter `java -classpath lib/jade/jade.jar:bin/:src/ -gui jade.Boot "ag:sma.AgentAG(competition);rs:sma.AgentRS(competition);tabu:sma.AgentTabu(competition)"`
 ou bien tout simplement se référer au makefile.
+
+Pour tester le SMA, il y a un script `testsSMA.sh`, qui enregistre les résultats dans `sma.csv`.
+
+**Attention :** tous les tests nécessitent d'avoir téléchargé au préalable les fichiers `cities10.csv` à `cities200.csv`
 
 ## Pour compiler et exécuter :
 
